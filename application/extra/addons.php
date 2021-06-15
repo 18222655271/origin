@@ -13,9 +13,17 @@ return [
             'alisms',
         ],
         'app_init' => [
+            'banip',
             'crontab',
             'kefu',
+            'qrcode',
             'shopro',
+        ],
+        'electronics_build' => [
+            'electronics',
+        ],
+        'electronics_query' => [
+            'electronics',
         ],
         'action_begin' => [
             'geetest',
@@ -37,6 +45,8 @@ return [
     ],
     'route' => [
         '/leesign$' => 'leesign/index/index',
+        '/qrcode$' => 'qrcode/index/index',
+        '/qrcode/build$' => 'qrcode/index/build',
         '/third$' => 'third/index/index',
         '/third/connect/[:platform]' => 'third/index/connect',
         '/third/callback/[:platform]' => 'third/index/callback',

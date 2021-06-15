@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:58:"D:\phpstudy_pro\WWW\faas\addons\wwh\view\index\market.html";i:1623733314;s:58:"D:\phpstudy_pro\WWW\faas\addons\wwh\view\index\header.html";i:1620800281;s:58:"D:\phpstudy_pro\WWW\faas\addons\wwh\view\index\footer.html";i:1611641096;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:60:"D:\phpstudy_pro\WWW\faas\addons\wwh\view\index\download.html";i:1611641096;s:58:"D:\phpstudy_pro\WWW\faas\addons\wwh\view\index\header.html";i:1620800281;s:58:"D:\phpstudy_pro\WWW\faas\addons\wwh\view\index\footer.html";i:1611641096;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -8,7 +8,7 @@
     <meta name="renderer" content="webkit">
     <meta name="keywords" content=" "/>
     <meta name="description" content=" "/>
-    <title>营销网络_<?php echo $config['site_name']; ?></title>
+    <title>下载中心_<?php echo $config['site_name']; ?></title>
     <link rel="stylesheet" href="/assets/addons/wwh/css/swiper.css">
     <link rel="stylesheet" href="/assets/addons/wwh/css/style.css">
     <link rel="stylesheet" href="/assets/addons/wwh/css/media.css">
@@ -226,8 +226,8 @@
             <div class="sub-nav">
                 <div class="items">
                     <a href="<?php echo addon_url('wwh/index/service'); ?>">服务策略</a><i></i>
-                    <a class="active" href="<?php echo addon_url('wwh/index/market'); ?>">营销网络</a><i></i>
-                    <a href="<?php echo addon_url('wwh/index/download'); ?>">资料下载</a><i></i>
+                    <a href="<?php echo addon_url('wwh/index/market'); ?>">营销网络</a><i></i>
+                    <a class="active" href="<?php echo addon_url('wwh/index/download'); ?>">资料下载</a><i></i>
                 </div>
             </div>
             <div class="hamb">当前位置：服务中心</div>
@@ -235,89 +235,63 @@
     </div>
 </div>
 
-<div id="market">
-    <div class="ne1">
+<div id="download">
     <div class="container">
-        <div class="mapm">
-            <img src="/assets/addons/wwh/images/20200911153536.png">
-        </div>
-        <div class="a_dw" id="dt"></div>
-        <div class="tc2 wow">
-            销售咨询 <a class="f_24" href="tel:0571-88736894">0571-88888888</a><br/>
-            技术支持 <a class="f_24" href="tel:0571-88739930">0571-66666666</a>
-        </div>
-        <div class="tc3 clearfix wow" >
-            <div class="tlt">
-                <div class="tbtn clearfix">
-				<?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                    <span><?php echo $vo['citylist']; ?></span>
-					<?php endforeach; endif; else: echo "" ;endif; ?>
+        <div class="clearfix down_1">
+            <div class="down_1_left">
+                资料下载
+                <br>
+                <span>Download</span>
+            </div>
 
-                </div>
-                <div class="txbox txbox1">
-				<?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                    <dl class="dl1">
-                        <dt class="dtt"><?php echo $vo['citylist']; ?></dt>
-                        <dd>
-                            <a class="dtt">联系人：<?php echo $vo['name']; ?></a>
-                            <div class="dtc"></div>
-                        </dd>
-                        <dd>
-                            <a class="dtt">地址：<?php echo $vo['address']; ?></a>
-                            <div class="dtc"></div>
-                        </dd>
-                        <dd>
-                            <a class="dtt">电话：<?php echo $vo['tel']; ?></a>
-                            <div class="dtc"></div>
-                        </dd>
-                    </dl>
-					<?php endforeach; endif; else: echo "" ;endif; ?>
-                </div>
-            </div>
-            <div class="trt">
-                <img src="/assets/addons/wwh/images/20200911153717.png">
-                <ul class="ditu">
-                    <li><s></s>浙江</li>
-                    <li><s></s>江苏</li>
-                    <li>安徽</li>
-                    <li>山东</li>
-                    <li>福建</li>
-                    <li><s></s>广东</li>
-                    <li>江西</li>
-                    <li><s></s>北京</li>
-                    <li><s></s>陕西</li>
-                    <li>河北</li>
-                    <li><s></s>辽宁</li>
-                    <li>湖南</li>
-                    <li><s></s>河南</li>
-                    <li><s></s>上海</li>
-                    <li><s></s>云南</li>
-                    <li><s></s>四川</li>
-                    <li><s></s>湖北</li>
-                    <li>吉林</li>
-                    <li>山西</li>
-                    <li>重庆</li>
-                    <li>广西</li>
-                    <li>天津</li>
-                    <li>内蒙古</li>
-                    <li>贵州</li>
-                    <li>黑龙江</li>
-                    <li>海南</li>
-                    <li>台湾</li>
-                    <li>香港</li>
-                    <li>新疆</li>
-                    <li>甘肃</li>
-                    <li>宁夏</li>
-                    <li>青海</li>
-                    <li>澳门</li>
-                    <li>西藏</li>
-                </ul>
+            <div class="down_1_right">
+                    <ul>
+                        <div class="select">
+                            <select name="category" id="category">
+                                <option style="background-color: #ffffff;" value="" selected>&nbsp;&nbsp;&nbsp;选择分类</option>
+                                <?php if(is_array($name) || $name instanceof \think\Collection || $name instanceof \think\Paginator): $i = 0; $__LIST__ = $name;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                <option style="color: #808080;background-color: #f4f4f4;" value="<?php echo $vo['id']; ?>">&nbsp;&nbsp;&nbsp;<?php echo $vo['name']; ?></option>
+                                <?php if(is_array($vo['child']) || $vo['child'] instanceof \think\Collection || $vo['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i;?>
+                                <option style="color:#333;background-color: #ffffff;" value="<?php echo $vo2['id']; ?>">&nbsp;&nbsp;&nbsp; ├ <?php echo $vo2['name']; ?></option>
+                                <?php if(is_array($vo2['child']) || $vo2['child'] instanceof \think\Collection || $vo2['child'] instanceof \think\Paginator): $i = 0; $__LIST__ = $vo2['child'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo3): $mod = ($i % 2 );++$i;?>
+                                <option style="color:#808080;background-color: #ffffff;" value="<?php echo $vo3['id']; ?>">&nbsp;&nbsp;&nbsp; │├ <?php echo $vo3['name']; ?></option>
+                                <?php endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; endforeach; endif; else: echo "" ;endif; ?>
+                            </select>
+                        </div>
+                        <li>
+                            <div class="down_form">
+                                <input type="text" value="" name="keywords" id="keywords" placeholder="请输入名称" />
+                            </div>
+                            <button name="button" type="button" id="btn" class="down_btn"></button>
+                        </li>
+                    </ul>
             </div>
         </div>
+
+        <div class="clearfix down_2">
+            <ul>
+                <li class="down_2_1 ">
+                    <span class="down_2_1_left">名称</span>
+                    <span class="down_2_1_right">操作</span>
+                </li>
+                <div id="shuju">
+                <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                <li class="down_2_2">
+                    <a href="<?php echo $vo['attachfile']; ?>">
+                        <span class="down_2_2_left"><?php echo $vo['downloadname']; ?></span>
+                        <span class="down_2_2_left2"><?php echo $vo['time']; ?></span>
+                    </a>
+                    <a href="<?php echo $vo['attachfile']; ?>">
+                        <span class="down_2_2_right">下载</span>
+                    </a>
+                </li>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+                </div>
+            </ul>
+        </div>
+        <div class="fenye"><?php echo $page; ?></div>
     </div>
 </div>
-</div>
-
 <!--底部-->
 <!-- 返回顶部 -->
 <div class="right clearfix">
@@ -361,16 +335,71 @@
 <script src="/assets/addons/wwh/js/swiper.min.js"></script>
 <script src="/assets/addons/wwh/js/style.js"></script>
 <script type="text/javascript">
-
     $('.header-container .clearfix .H-nav .Hnav-menu').eq(3).addClass('nav-active');//顶部导航变色
 
-    $(".ne1 .tc3 .tlt .tbtn span").eq(0).addClass('act');
-    $(".ne1 .tc3 .tlt .tbtn span").on('click', function () {
-        var idx = $(this).index();
-        $(this).stop(true, false).addClass('act').siblings().stop(true, false).removeClass('act');
-        $('.ne1 .tc3 .tlt .txbox1 dl').eq(idx).stop(true, false).show().siblings().stop(true, false).hide();
-
+    $(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        _this = $(this);
+        var href = _this.attr("href");
+        $.ajax({
+            url:href,
+            dataType:'json',
+            type:"post",
+            data:[],
+            success:function(res){
+                console.log(res);
+                $("#shuju").empty();
+                var str = "";
+                $.each(res.list.data,function(k,v){
+                    str+='<li class="down_2_2">\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_left">'+v.downloadname+'</span>\
+                        <span class="down_2_2_left2">'+v.time+'</span>\
+                        </a>\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_right">下载</span>\
+                        </a>\
+                        </li>';
+                });
+				location.href = "#nav2";
+                $('#shuju').html(str);
+                $(".fenye").html(res.page);
+            }
+        })
     });
+
+    $(function(){
+        $("button").click(function(){
+            var k = $("#keywords").val();
+            var c = $("#category").val();
+            $.ajax({
+                type:"post",
+                url:"<?php echo addon_url('wwh/index/download'); ?>",
+                data:{keywords:k,category:c},
+                dataType:"json",
+                success:function(res){
+                    console.log(res);
+                    $("#shuju").empty();
+                    var str = "";
+                    $.each(res.list.data,function(k,v){
+                        str+='<li class="down_2_2">\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_left">'+v.downloadname+'</span>\
+                        <span class="down_2_2_left2">'+v.time+'</span>\
+                        </a>\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_right">下载</span>\
+                        </a>\
+                        </li>';
+                    });
+                    $('#shuju').html(str);
+                    $(".fenye").html(res.page);
+                }
+            })
+            $("#keywords").val("");
+            $("#category").val("");
+        })
+    })
 </script>
 </body>
 </html>

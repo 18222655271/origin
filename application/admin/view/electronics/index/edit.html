@@ -1,0 +1,118 @@
+<form class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label for="c-express_name" class="control-label col-xs-12 col-sm-2">物流快递名称:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-express_name" data-rule="required" class="form-control" name="row[express_name]" type="text" value="{$row.express_name}">
+        </div>
+    </div>
+ 	<div class="form-group">
+        <label for="c-express_code1" class="control-label col-xs-12 col-sm-2">物流快递编码（快递鸟）:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-express_code1" data-rule="required" class="form-control" name="row[express_code1]" type="text" value="{$row.express_code1}">
+       <span class="text-red">请准确输入编码,<a href="http://www.kdniao.com/file/2019%E5%BF%AB%E9%80%92%E9%B8%9F%E6%8E%A5%E5%8F%A3%E6%94%AF%E6%8C%81%E5%BF%AB%E9%80%92%E5%85%AC%E5%8F%B8%E7%BC%96%E7%A0%81.xlsx">
+         2019快递鸟接口支持快递公司编码.xlsx
+         </a></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-pay_type" class="control-label col-xs-12 col-sm-2">邮费支付方式:</label>
+        <div class="col-xs-12 col-sm-4">
+            <select id="c-pay_type" data-rule="required" class="form-control selectpicker" name="row[pay_type]">
+                <option value="1" {if $row.pay_type=='1'}selected{/if}>现付</option>
+                <option value="2" {if $row.pay_type=='2'}selected{/if}>到付</option>
+                <option value="3" {if $row.pay_type=='3'}selected{/if}>月结</option>
+                <option value="4" {if $row.pay_type=='4'}selected{/if}>第三方支付(仅SF支持)</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-customer_name" class="control-label col-xs-12 col-sm-2">电子面单帐号:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-customer_name" type="text"  class="form-control" name="row[customer_name]" value="{$row.customer_name}"  />
+        </div>
+        <span class="text-gray">根据情况填写</span>
+    </div>
+    <div class="form-group">
+        <label for="c-customer_pwd" class="control-label col-xs-12 col-sm-2">面单密码:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-customer_pwd" type="text"  class="form-control" name="row[customer_pwd]" value="{$row.customer_pwd}"  />
+        </div>
+        <span class="text-gray">根据情况填写</span>
+    </div>
+
+    <div class="form-group">
+        <label for="c-month_code" class="control-label col-xs-12 col-sm-2">月结号:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-month_code" type="text"  class="form-control" name="row[month_code]" value="{$row.month_code}"  />
+        </div>
+        <span class="text-gray">根据情况填写</span>
+    </div>
+    <div class="form-group">
+        <label for="c-send_site" class="control-label col-xs-12 col-sm-2">网点编码:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-send_site" type="text"  class="form-control" name="row[send_site]" value="{$row.send_site}"  />
+        </div>
+        <span class="text-gray">根据情况填写</span>
+    </div>
+    <div class="form-group">
+        <label for="c-send_staff" class="control-label col-xs-12 col-sm-2">网点名称:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-send_staff" type="text"  class="form-control" name="row[send_staff]" value="{$row.send_staff}"  />
+        </div>
+        <span class="text-gray">根据情况填写</span>
+    </div>
+
+    <div class="form-group">
+        <label for="c-name" class="control-label col-xs-12 col-sm-2">发货人姓名:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-name" type="text" data-rule="required" class="form-control" name="row[name]" value="{$row.name}"  />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-phone" class="control-label col-xs-12 col-sm-2">发货人手机:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-phone" type="number" data-rule="required" class="form-control" name="row[phone]" value="{$row.phone}"  />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-detail" class="control-label col-xs-12 col-sm-2">发货地址:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="form-inline" data-toggle="cxselect" data-selects="province,city,area">
+
+                <select class="province form-control" name="province" data-url="ajax/area">
+                    <option value="{$row.province_id}" selected=""></option>
+                </select>
+                <select class="city form-control" name="city" data-url="ajax/area">
+                    <option value="{$row.city_id}" selected=""></option>
+                </select>
+                <select class="area form-control" name="area" data-url="ajax/area">
+                    <option value="{$row.region_id}" selected=""></option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="c-detail" class="control-label col-xs-12 col-sm-2">详细地址:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-detail" type="text" data-rule="required" class="form-control" name="row[detail]" value="{$row.detail}"   />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="c-sort" class="control-label col-xs-12 col-sm-2">排序:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-sort" class="form-control" name="row[sort]" type="number" value="{$row.sort}">
+        </div>
+    </div>
+    
+	
+
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
