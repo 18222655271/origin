@@ -1,0 +1,249 @@
+<html>
+ <head>
+  <style type="text/css">
+    @media (max-width: 375px) {
+        .edit-form tr td input {
+            width: 100%;
+        }
+
+        .edit-form tr th:first-child, .edit-form tr td:first-child {
+            width: 20%;
+        }
+
+        .edit-form tr th:nth-last-of-type(-n+2), .edit-form tr td:nth-last-of-type(-n+2) {
+            display: none;
+        }
+    }
+
+    .edit-form table > tbody > tr td a.btn-delcfg {
+        visibility: hidden;
+    }
+
+    .edit-form table > tbody > tr:hover td a.btn-delcfg {
+        visibility: visible;
+    }
+</style> 
+ </head>
+ <body>
+  <div class="panel panel-default panel-intro"> 
+   <div class="panel-heading"> 
+    <ul class="nav nav-tabs"> 
+     <li class="active"><a href="#about" data-toggle="tab">企业介绍</a></li>
+     <li class=""><a href="#culture" data-toggle="tab">企业文化</a></li>
+    </ul> 
+   </div> 
+   <div class="panel-body"> 
+    <div id="myTabContent" class="tab-content"> 
+     <div class="tab-pane fade active in" id="about"> 
+      <div class="widget-body no-padding"> 
+       <form id="basic-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:url('Admin/wwh/About/about')}" novalidate="novalidate"> 
+        <input type="hidden" name="__token__" value="3d21ee81f41717393f2f12f92c2fa29f" /> 
+        <table class="table table-striped"> 
+         <tbody> 
+          <tr> 
+           <td style="width:8%">关于标题</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <input type="text" name="about_title" value="{$data['about_title']}" class="form-control" /> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>about_title</td> 
+           <td></td> 
+          </tr>
+          <tr>
+           <td style="width:8%">关于简述</td>
+           <td>
+            <div class="row">
+             <div class="col-sm-8 col-xs-12">
+              <textarea id="c-about_description" name="about_description" class="form-control editor" rows="5" name="about_description" cols="50">{$data.about_description|htmlentities}</textarea>
+             </div>
+             <div class="col-sm-4"></div>
+            </div> </td>
+           <td>about_description</td>
+           <td></td>
+          </tr> 
+          <tr> 
+           <td style="width:8%">关于内容</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <textarea id="c-about_content" name="about_content" class="form-control editor" rows="5" name="about_content" cols="50">{$data.about_content|htmlentities}</textarea>
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>about_content</td> 
+           <td></td> 
+          </tr> 
+         </tbody> 
+         <tfoot> 
+          <tr> 
+           <td></td> 
+           <td> <button type="submit" class="btn btn-success btn-embossed">保存</button> </td> 
+           <td></td> 
+           <td></td> 
+          </tr> 
+         </tfoot> 
+        </table> 
+       </form> 
+      </div> 
+     </div>
+
+    <div class="tab-pane fade " id="culture">
+      <div class="widget-body no-padding"> 
+       <form id="basic-form" class="edit-form form-horizontal nice-validator n-default n-bootstrap" role="form" data-toggle="validator" method="POST" action="{:url('Admin/wwh/About/culture')}" novalidate="novalidate"> 
+        <input type="hidden" name="__token__" value="3d21ee81f41717393f2f12f92c2fa29f" /> 
+        <table class="table table-striped"> 
+         <tbody> 
+          <tr>
+           <td style="width:8%">企业文化标题1</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <input type="text" name="culture_title1" value="{$data['culture_title1']}" class="form-control" /> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_title1</td> 
+           <td></td> 
+          </tr>
+          <tr>
+           <td style="width:8%">企业文化英文1</td>
+           <td>
+            <div class="row">
+             <div class="col-sm-8 col-xs-12">
+              <input type="text" name="culture_en1" value="{$data['culture_en1']}" class="form-control" />
+             </div>
+             <div class="col-sm-4"></div>
+            </div> </td>
+           <td>culture_en1</td>
+           <td></td>
+          </tr>
+          <tr> 
+           <td style="width:8%">企业文化描述1</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <textarea name="culture_des1" class="form-control" style="height:100px;">{$data['culture_des1']}</textarea> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_des1</td> 
+           <td></td> 
+          </tr>
+          <tr> 
+           <td style="width:8%">企业文化标题2</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <input type="text" name="culture_title2" value="{$data['culture_title2']}" class="form-control" /> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_title2</td> 
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化英文2</td>
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12">
+              <input type="text" name="culture_en2" value="{$data['culture_en2']}" class="form-control" />
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_en2</td>
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化标题3</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <input type="text" name="culture_title3" value="{$data['culture_title3']}" class="form-control" /> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_title3</td> 
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化英文3</td>
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12">
+              <input type="text" name="culture_en3" value="{$data['culture_en3']}" class="form-control" />
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_en3</td>
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化标题4</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <input type="text" name="culture_title4" value="{$data['culture_title4']}" class="form-control" /> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_title4</td> 
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化英文4</td>
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12">
+              <input type="text" name="culture_en4" value="{$data['culture_en4']}" class="form-control" />
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_en4</td>
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化标题5</td> 
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12"> 
+              <input type="text" name="culture_title5" value="{$data['culture_title5']}" class="form-control" /> 
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_title5</td> 
+           <td></td> 
+          </tr> 
+          <tr> 
+           <td style="width:8%">企业文化英文5</td>
+           <td> 
+            <div class="row"> 
+             <div class="col-sm-8 col-xs-12">
+              <input type="text" name="culture_en5" value="{$data['culture_en5']}" class="form-control" />
+             </div> 
+             <div class="col-sm-4"></div> 
+            </div> </td> 
+           <td>culture_en5</td>
+           <td></td> 
+          </tr> 		  
+         </tbody> 
+         <tfoot> 
+          <tr> 
+           <td></td> 
+           <td> <button type="submit" class="btn btn-success btn-embossed">保存</button> </td> 
+           <td></td> 
+           <td></td> 
+          </tr> 
+         </tfoot> 
+        </table> 
+       </form> 
+      </div> 
+     </div>
+
+    </div> 
+   </div> 
+  </div>
+ </body>
+</html>

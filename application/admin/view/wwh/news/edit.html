@@ -1,0 +1,82 @@
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Newscategory')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[newscategoryid]', $newscategorylist, $row['newscategoryid'], ['class'=>'form-control selectpicker', 'data-size'=>'10', 'id'=>'c-newscategoryid', 'data-rule'=>'required'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Newsname')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-newsname" class="form-control" name="row[newsname]" type="text" value="{$row.newsname|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('N_keywords')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-n_keywords" class="form-control" name="row[n_keywords]" type="text" value="{$row.n_keywords|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('N_description')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-n_description" class="form-control" name="row[n_description]" type="text" value="{$row.n_description|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Summary')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-summary" class="form-control" name="row[summary]" type="text" value="{$row.summary|htmlentities}">
+        </div>
+    </div>
+	<div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Tjdata')}:</label>
+        <div class="col-xs-12 col-sm-8"> 
+            <div class="radio">
+            {foreach name="tjdataList" item="vo"}
+            <label for="row[tjdata]-{$key}"><input id="row[tjdata]-{$key}" name="row[tjdata]" type="radio" value="{$key}" {in name="key" value="$row.tjdata"}checked{/in} /> {$vo}</label> 
+            {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Image')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-image" class="form-control" size="50" name="row[image]" type="text" value="{$row.image|htmlentities}">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-image" class="btn btn-danger plupload" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-image"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-image"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Weigh')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-weigh" data-rule="required" class="form-control" name="row[weigh]" type="number" value="{$row.weigh|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[time]" type="text" value="{$row.time}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Content')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-content" data-rule="required" class="form-control editor" rows="5" name="row[content]" cols="50">{$row.content|htmlentities}</textarea>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

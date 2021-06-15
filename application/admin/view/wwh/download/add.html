@@ -1,0 +1,48 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Downloadcategory')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_select('row[downloadcategoryid]', $downloadcategorylist, null, ['class'=>'form-control selectpicker', 'data-rule'=>'required','id'=>'c-downloadcategoryid'])}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Downloadname')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-downloadname" class="form-control" name="row[downloadname]" type="text">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[time]" type="text" value="{:date('Y-m-d')}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Weigh')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-weigh" data-rule="required" class="form-control" name="row[weigh]" type="number">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Attachfile')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-attachfile" data-rule="required" class="form-control" size="50" name="row[attachfile]" type="text">
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-attachfile" class="btn btn-danger plupload" data-input-id="c-attachfile" data-multiple="false" data-preview-id="p-attachfile"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>
+                    <span><button type="button" id="fachoose-attachfile" class="btn btn-primary fachoose" data-input-id="c-attachfile" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>
+                </div>
+                <span class="msg-box n-right" for="c-attachfile"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-attachfile"></ul>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

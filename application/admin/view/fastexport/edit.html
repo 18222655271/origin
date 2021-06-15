@@ -1,0 +1,368 @@
+<style type="text/css">
+    .field_title{
+        display: inline-block;
+        width: 19%;
+    }
+    .field_prompt{
+        display: inline-block;
+        text-align: center;
+        width: 14%;
+    }
+    .field_discerns{
+        display: inline-block;
+        width: 12%;
+    }
+    .field_scheme{
+        display: inline-block;
+        width: 37%;
+    }
+    .where_field_op{
+        display: inline-block;
+        text-align: center;
+        width: 32%;
+    }
+    .where_field_condition{
+        display: inline-block;
+        width: 52%;
+    }
+    .order_field{
+        display: inline-block;
+        width: 70%;
+    }
+    .order_field_condition{
+        display: inline-block;
+        width: 28%;
+    }
+    .tabbar_title{
+        padding: 15px;
+        background: #e8edf0;
+        border-color: #e8edf0;
+        margin-bottom: 15px;
+    }
+    .reduction_field{
+        color: #335B64;
+        margin-right: 6px;
+    }
+    .panel-body{
+        padding-top: 0;
+    }
+    .middle_inline{
+        display: inline-block;
+        vertical-align: middle;
+        margin-bottom: 0;
+    }
+    .kefu_form_control .sp_container {
+        width: 100% !important;
+    }
+    .panel{
+        box-shadow: none;
+    }
+    .xls_max_number .msg-wrap.n-error{
+        margin-left: 66px;
+    }
+    .clear_margin_bottom {
+        margin-bottom: 0px;
+    }
+    .clear_margin_top {
+        margin-top: 0px;
+    }
+    .memory_limit .msg-wrap.n-error{
+        margin-left: 50px;
+    }
+</style>
+<div class="row animated fadeInRight">
+    <div class="col-md-8 col-md-offset-2">
+
+        <div class="panel panel-default panel-intro">
+
+            <div class="panel-heading tabbable">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">基础配置</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">关联表配置</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">数据筛选</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#tab4" aria-controls="tab4" role="tab" data-toggle="tab">其他配置</a>
+                    </li>
+                </ul>
+            </div>
+        
+            <div class="panel-body">
+                <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                    {:token()}
+                    <div class="box-body tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="tab1">
+
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input id="c-name" data-rule="required" class="form-control" name="row[name]" type="text" value="{$row.name|htmlentities}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2">{:__('Main Table')}:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <select id="c-main_table" data-rule="required;checkTable" data-rule-checkTable="
+                                            function (e) {
+                                                if(e.value == 'none') {
+                                                    return '请选择数据表';
+                                                }
+                                            }
+                                        " class="form-control" name="row[main_table]">
+                                        <option data-comment="" value="none">请选择</option>
+                                        {volist name="tableList" id="main_table"}
+                                            <option data-comment="{$main_table.comment}" value="{$main_table.name}" {eq name="row.main_table" value="$main_table.name"}selected{/eq}>{$main_table.name}{if $main_table.comment} - {$main_table.comment}{/if}</option>
+                                        {/volist}
+                                    </select>
+                                    <span class="help-block">请先选择要导出的数据表,随后在生成的列表中配置要导出的字段</span>
+                                </div>
+                            </div>
+
+                            <div id="field_config">
+
+                                {foreach name="row.fields" item="field" key="field_name"}
+                                <div class="form-group" data-field="{$field_name}">
+                                    <label class="control-label col-xs-12 col-sm-2"><a class="reduction_field" href="javascript:;">[-]</a>{$field_name}:</label>
+                                    <div class="col-xs-12 col-sm-9">
+                                        <input placeholder="字段标题" class="form-control field_title" name="row[field_config][title][{$field_name}]" value="{$field.title}">
+                                        <span class="field_prompt">数据识别:</span>
+                                        <select name="row[field_config][discerns][{$field_name}]" class="form-control field_discerns">
+                                            <option value="0" {eq name="field.discerns" value="0"}selected{/eq}>文本</option>
+                                            <option value="1" {eq name="field.discerns" value="1"}selected{/eq}>数字</option>
+                                            <option value="2" {eq name="field.discerns" value="2"}selected{/eq}>日期</option>
+                                            <!-- <option value="3" {eq name="field.discerns" value="3"}selected{/eq}>图片</option> -->
+                                            <option value="4" {eq name="field.discerns" value="4"}selected{/eq}>文件</option>
+                                            <option value="5" {eq name="field.discerns" value="5"}selected{/eq}>赋值</option>
+                                        </select>
+                                        <span class="field_prompt">赋值方案:</span>
+                                        <input placeholder="数据识别为“赋值”时,才需填写" class="form-control field_scheme" name="row[field_config][scheme][{$field_name}]" value="{$field.scheme}">
+                                    </div>
+                                </div>
+                                {/foreach}
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="tab2">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2">关联表数量:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <input id="c-join_table_number" data-rule="integer(+0)" class="form-control" type="number" value="{$row.join_table_number}">
+                                </div>
+                            </div>
+
+                            <div id="join_table">
+                                {volist name="row.join_table" id="jtable"}
+                                    <hr class="divider {$key}">
+                                    <div class="form-group {$key}">
+                                        <label class="control-label col-xs-12 col-sm-2">选择关联表:</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <select data-id="{$i}" id="s-{$key}" class="form-control s-join_table" name="row[join_table][{$key}][table]">
+                                                <option data-comment="" value="none">请选择</option>
+                                                {foreach name="tableList" item="table" key="table_key"}
+                                                    <option data-comment="{$table.comment}" value="{$table.name}" {eq name="jtable.table" value="$table.name"}selected{/eq}>{$table.name}{if $table.comment} - {$table.comment}{/if}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group {$key}">
+                                        <label class="control-label col-xs-12 col-sm-2">关联表别名:</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <input placeholder="非必填,取好别名则关联表可与源表相同" class="form-control table_name_as" id="s-join_table_as_{$i}" name="row[join_table][{$key}][join_as]" type="text" value="{$jtable.join_as}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group {$key}">
+                                        <label class="control-label col-xs-12 col-sm-2">关联外键:</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <select class="form-control foreign_key foreign_key_table_{$i}" name="row[join_table][{$key}][foreign_key]">
+                                                {foreach name="table_field" item="table_field_item" key="table_field_key"}
+                                                <option value="{$table_field_key}" {eq name="jtable.foreign_key" value="$table_field_key"}selected{/eq}>{$table_field_key} - {$table_field_item.name}</option>
+                                                {/foreach}
+                                            </select>
+                                            <span class="help-block">若无字段可选,请先选择数据源表</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group {$key}">
+                                        <label class="control-label col-xs-12 col-sm-2">关联主键:</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <select class="form-control local_key local_key_table_{$i}" name="row[join_table][{$key}][local_key]">
+                                                {foreach name="jtable.field_list" item="jtable_field" key="jtable_field_key"}
+                                                    <option value="{$jtable_field_key}" {eq name="jtable.local_key" value="$jtable_field_key"}selected{/eq}>{$jtable_field_key} - {$jtable_field.name}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group {$key}">
+                                        <label class="control-label col-xs-12 col-sm-2">JOIN类型:</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <select class="form-control" name="row[join_table][{$key}][join_type]">
+                                                <option value="INNER" {eq name="jtable.join_type" value="INNER"}selected{/eq}>INNER - 至少一个匹配</option>
+                                                <option value="LEFT" {eq name="jtable.join_type" value="LEFT"}selected{/eq}>LEFT - 左表有匹配</option>
+                                                <option value="RIGHT" {eq name="jtable.join_type" value="RIGHT"}selected{/eq}>RIGHT - 右表有匹配</option>
+                                                <option value="FULL" {eq name="jtable.join_type" value="FULL"}selected{/eq}>FULL - 任意表有匹配</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group {$key}">
+                                        <label class="control-label col-xs-12 col-sm-2">取值字段:</label>
+                                        <div class="col-xs-12 col-sm-8">
+                                            <select multiple="true" data-id="{$i}" class="form-control selectpicker s-join_table_field" id="fields_table_{$i}">
+                                                {foreach name="jtable.field_list" item="jtable_field_item" key="jtable_field_key"}
+                                                    <option value="{$jtable_field_key}" {in name="jtable_field_key" value="$jtable.field_name_arr_select"}selected="selected"{/in}>{$jtable_field_key} - {$jtable_field_item.name}</option>
+                                                {/foreach}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="join_table_{$i}" id="field_list_table_{$i}">
+                                        
+                                    {foreach name="jtable.field_name_arr" item="field" key="field_name"}
+                                    <div class="form-group" data-field="{$field_name}">
+                                        <label class="control-label col-xs-12 col-sm-2">{$field_name}:</label>
+                                        <div class="col-xs-12 col-sm-9">
+                                            <input placeholder="字段标题" class="form-control field_title" name="row[join_table][join_table_{$i}][fields][title][{$field_name}]" value="{$field.title}">
+                                            <span class="field_prompt">数据识别:</span>
+                                            <select name="row[join_table][join_table_{$i}][fields][discerns][{$field_name}]" class="form-control field_discerns">
+                                                <option value="0" {eq name="field.discerns" value="0"}selected{/eq}>文本</option>
+                                                <option value="1" {eq name="field.discerns" value="1"}selected{/eq}>数字</option>
+                                                <option value="2" {eq name="field.discerns" value="2"}selected{/eq}>日期</option>
+                                                <!-- <option value="3" {eq name="field.discerns" value="3"}selected{/eq}>图片</option> -->
+                                                <option value="4" {eq name="field.discerns" value="4"}selected{/eq}>文件</option>
+                                                <option value="5" {eq name="field.discerns" value="5"}selected{/eq}>赋值</option>
+                                            </select>
+                                            <span class="field_prompt">赋值方案:</span>
+                                            <input placeholder="数据识别为“赋值”时,才需填写" class="form-control field_scheme" name="row[join_table][join_table_{$i}][fields][scheme][{$field_name}]" value="{$field.scheme}">
+                                        </div>
+                                    </div>
+                                    {/foreach}
+
+                                    </div>
+                                {/volist}
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="tab3">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2">筛选字段:</label>
+                                <div class="col-xs-12 col-sm-8">
+                                    <select multiple="true" class="form-control selectpicker" id="where_field">
+                                        {foreach name="allField" item="all_field" key="all_field_name"}
+                                        <option value="{$all_field_name}" {in name="all_field_name" value="$row.where_field_arr_select"}selected="selected"{/in}>{$all_field.field_name}</option>
+                                        {/foreach}
+                                    </select>
+                                    <span class="help-block">请先配置源表和关联表,随后可在此处选择一些字段设置筛选条件</span>
+                                </div>
+                            </div>
+
+                            <div id="where_field_input">
+
+                                {foreach name="row.where_field_arr" item="where_field" key="where_field_name"}
+                                <div class="form-group" data-field="{$where_field_name}">
+                                    <label class="control-label col-xs-12 col-sm-3">{$where_field_name}:</label>
+                                    <div class="col-xs-12 col-sm-7">
+                                        <select name="row[where_field][op][{$where_field_name}]" class="form-control where_field_op">
+                                            <option value="=" {eq name="where_field.op" value="="}selected{/eq}>等于</option>
+                                            <option value="<>" {eq name="where_field.op" value="<>"}selected{/eq}>不等于</option>
+                                            <option value=">" {eq name="where_field.op" value=">"}selected{/eq}>大于</option>
+                                            <option value=">=" {eq name="where_field.op" value=">="}selected{/eq}>大于等于</option>
+                                            <option value="<" {eq name="where_field.op" value="<"}selected{/eq}>小于</option>
+                                            <option value="<=" {eq name="where_field.op" value="<="}selected{/eq}>小于等于</option>
+                                            <option value="LIKE" {eq name="where_field.op" value="LIKE"}selected{/eq}>LIKE - 模糊查询</option>
+                                            <!-- <option value="EXP" {eq name="where_field.op" value="EXP"}selected{/eq}>表达式 - 支持SQL语法</option> -->
+                                        </select>
+                                        <span class="field_prompt">查询条件:</span>
+                                        <input placeholder="" class="form-control where_field_condition" name="row[where_field][condition][{$where_field_name}]" value="{$where_field.condition}">
+                                    </div>
+                                </div>
+                                {/foreach}
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="tab4">
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3">排序字段:</label>
+                                <div class="col-xs-12 col-sm-7">
+                                    <select class="form-control order_field" name="row[order_field]" id="order_field">
+                                        {foreach name="allField" item="all_field" key="all_field_name"}
+                                        <option value="{$all_field_name}" {eq name="row.order_field" value="$all_field_name" }selected{/eq}>{$all_field.field_name}</option>
+                                        {/foreach}
+                                    </select>
+                                    <select class="form-control order_field_condition" name="row[order_type]">
+                                        <option value="DESC" {eq name="row.order_type" value="DESC" }selected{/eq}>倒序(从大到小)</option>
+                                        <option value="ASC" {eq name="row.order_type" value="ASC" }selected{/eq}>正序(从小到大)</option>
+                                    </select>
+                                    <span class="help-block">请先配置源表和关联表,随后可在此处设置以某字段进行排序</span>
+                                </div>
+                            </div>
+                            <div class="form-group xls_max_number">
+                                <label for="c-xls_max_number" class="control-label col-xs-12 col-sm-3">单个xls文件保存:</label>
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="input-group input-groupp-md">
+                                        <input id="c-xls_max_number" data-rule="required;range(1~30000)" class="form-control" name="row[xls_max_number]" type="number" value="{$row.xls_max_number}">
+                                        <span class="input-group-addon">条记录</span>
+                                    </div>
+                                    <span class="help-block">若导出记录数超出以上设置,则自动分为多个xls文件保存</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3">xls文件创建并发:</label>
+                                <div class="col-xs-12 col-sm-7">
+                                    <input data-rule="required;range(1~100)" class="form-control" name="row[xls_create_concurrent]" type="number" value="{$row.xls_create_concurrent}">
+                                    <span class="help-block clear_margin_bottom">若有多个xls文件需要准备,此处设置<strong>同一时间</strong>准备的xls文件数</span>
+                                    <span class="help-block clear_margin_top">若单个xls文件需保存2万以上数据,普通服务器请设置为`1`(受磁盘IO限制)</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="c-memory_limit" class="control-label col-xs-12 col-sm-3">脚本内存限制:</label>
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="input-group memory_limit input-groupp-md">
+                                        <input id="c-memory_limit" data-rule="required;checkMemory" data-rule-checkMemory="
+                                            function (e) {
+                                                var fieldCount = Number(Config.fieldCount);
+                                                if (fieldCount <= 0){
+                                                    return '请选择要导出的字段';
+                                                }
+                                                var memory = (fieldCount * Number($('#c-xls_max_number').val())) / 1024;
+                                                var memory_limit = Number(e.value);
+                                                if (memory >= Number(memory_limit)){
+                                                    return '需要更多内存 >' + (memory + 50).toFixed(0) + 'Mb';
+                                                }
+                                            }
+                                        " class="form-control" name="row[memory_limit]" type="number" value="{$row.memory_limit}">
+                                        <span class="input-group-addon">Mb</span>
+                                    </div>
+                                    <span class="help-block clear_margin_bottom">创建单个xls文件时,允许使用的最大内存量</span>
+                                    <span class="help-block clear_margin_top">若提示需要更多的内存,请在硬件条件允许的情况下,设置更高的值;或降低单个xls文件保存的记录数</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-3">导出:</label>
+                                <div class="col-xs-12 col-sm-7">
+                                    <div class="input-group input-groupp-md">
+                                        <input class="form-control" name="row[export_number]" type="number" value="{$row.export_number}">
+                                        <span class="input-group-addon">条记录</span>
+                                    </div>
+                                    <span class="help-block">需要导出的数据量,不填写为导出全部</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group layer-footer">
+                        <label class="control-label col-xs-12 col-sm-2"></label>
+                        <div class="col-xs-12 col-sm-8">
+                            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+                            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<style type="text/css">
+	#ribbon{
+		display: none;
+	}
+	.panel-body{
+		padding-top: 0px;
+	}
+	.badge-info {
+	  background-color: #3498db;
+	}
+	.badge-success {
+	  background-color: #18bc9c;
+	}
+	.badge-warning {
+	  background-color: #e74c3c;
+	}
+	.retry_task{
+		float: right;
+		margin-left: 10px;
+		cursor: pointer;
+	}
+	.status_button{
+		width: 130px;
+		display: none;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="box box-success">
+			<div class="panel-heading tabbable">
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>{$task.name}</strong>任务进行中，关闭此页面可能导致任务无法完成！若意外关闭，您可以随时通过点击后台的`上次执行进度`回到此页继续执行任务。
+				</div>
+            </div>
+            <div class="panel-body">
+
+				<ul class="list-group">
+					{foreach $task['subtask'] as $subtask}
+					<li class="list-group-item">
+						<span class="badge subtask_{$subtask.id}_status{switch name='subtask.status'}
+							{case value='1'} badge-info{/case}
+							{case value='2'} badge-success{/case}
+							{case value='3'} badge-warning{/case}
+							{default /}
+						{/switch}">{$subtask.status_text}</span>
+						{$subtask.id}. 第{$subtask.min}至{$subtask.min + $subtask.max}条记录
+					</li>
+					{/foreach}
+				</ul>
+
+				<div class="progress">
+					<div id="task_progress" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemin="5" aria-valuemax="100" style="min-width: 5%;"></div>
+				</div>
+
+				<a href="{$task.file}" class="btn btn-success center-block status_button">下载任务数据包</a>
+				
+            </div>
+		</div>
+	</div>
+</div>
