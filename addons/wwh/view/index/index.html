@@ -1,0 +1,205 @@
+﻿<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+  <meta name="renderer" content="webkit">
+  <meta name="keywords" content="{$config['keywords']}"/>
+  <meta name="description" content="{$config['description']}"/>
+  <title>首页_{$config['site_name']}</title>
+  <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+  <link rel="stylesheet" href="__ADDON__/css/style.css">
+  <link rel="stylesheet" href="__ADDON__/css/media.css">
+  <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="index">
+  <!-- Banner -->
+  <div class="in1">
+    <div class=" swiper swiper_in1 stop-swiping">
+      <div class="swiper-wrapper">
+        {volist name="banner" id="vo" key="k"}
+        <div class="swiper-slide">
+          <div class="sbox ">
+            <a href="{$vo['url']}"  class="pimg"><img src="{$vo['pc_image']}" alt="{$vo['title']}"></a>
+            <a href="{$vo['url']}"  class="mimg"><img src="{$vo['phone_image']}" alt="{$vo['title']}" ></a>
+            {if condition="$k eq 1"}<video src="{$vo['video_image']}" autoplay="" loop="" muted=""></video>{/if}
+            <div class="txt alltime">
+              <div class="tbox">
+                <div class="en">{$vo['bigfont']}<span> {$vo['font']}</span></div>
+                <div class="tt fbd ">{$vo['title']}</div>
+                <div class="more">
+                  <a href="{$vo['url']}"><img src="__ADDON__/images/20200911153229.png" alt="{$vo['title']}" ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/volist}
+      </div>
+      <div class="swiper-pagination pagination alltime"></div>
+      <div class="swiper-button-prev prev"></div>
+      <div class="swiper-button-next next"></div>
+    </div>
+  </div>
+
+  <div class="in2">
+    <div class="container">
+    <div class="last-product">
+      <div class="index-title">最新产品</div>
+      <div class="items">
+        {volist name="product" id="vo" key="k"}
+        <a class="{if condition='$k eq 1' }item item01{elseif condition='$k eq 6'/}item item02{else /}item{/if}" {if condition='$k eq 6' }style="margin: 0 0 1.33%"{/if} href="{:addon_url('wwh/index/product_detail',[':id'=>$vo['id']])}">
+        <div class="pic">
+        <img src="{$vo['index_image']}" alt="{$vo['productname']}">
+        </div>
+        <div class="info">
+        <p class="t1 over-line1">{$vo['productname']}</p>
+        <p class="t2 over-line2">{$vo['model']}</p>
+        </div>
+        </a>
+        {/volist}
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="in3">
+    <div class="about-box">
+      <div class="info-box">
+        <div class="title-box">
+          <div class="title">{$home['about_title']}</div>
+          <div class="desc">{$home['introduction']}</div>
+        </div>
+        <div class="num-box">
+          <div class="item">
+            <p class="num"> <span>{$home['title1']}</span>年</p>
+            <div class="tt">
+              {$home['description1']}
+            </div>
+          </div>
+          <div class="item">
+            <p class="num"> <span>{$home['title2']}</span>强</p>
+            <div class="tt">
+              {$home['description2']}
+            </div>
+          </div>
+          <div class="item">
+            <p class="num"> <span>{$home['title3']}</span>个</p>
+            <div class="tt">
+              {$home['description3']}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="in4">
+  <div class="wel-news container">
+    <div class="wel-news-title">
+      新闻中心
+      <a href="{:addon_url('wwh/index/news',[':id'=>''])}">查看更多<span></span></a>
+    </div>
+    <div class="wel-news-list">
+      <div class="container">
+        <div class="row f-cb">
+          {volist name="news" id="vo" mod="4"}
+          {eq name="mod" value="0"}
+          <div class="wt25 news01 wnews">
+            <a href="{:addon_url('wwh/index/news_detail',[':id'=>$vo['id']])}" style="background:url(__ADDON__/images/20200911153308.jpg ) no-repeat center;">
+              <h3>{$vo['time']}</h3>
+              <h2>{$vo['newsname']}</h2>
+            </a>
+          </div>
+          {/eq}
+
+          {eq name="mod" value="1"}
+          <div class="wt50 news02 wnews">
+            <a href="{:addon_url('wwh/index/news_detail',[':id'=>$vo['id']])}" style="background:url(__ADDON__/images/20200911153343.jpg ) no-repeat center;">
+              <h3>{$vo['time']}</h3>
+              <h2>{$vo['newsname']}</h2>
+              <br>
+              <br>
+              <p class="content">{$vo.content|strip_tags|mb_substr=0,30,'utf-8'}...</p>
+              <p class="more">查看详情 +</p>
+            </a>
+          </div>
+          {/eq}
+
+          {eq name="mod" value="2"}
+          <div class="wt25 news03 wnews">
+            <a href="{:addon_url('wwh/index/news_detail',[':id'=>$vo['id']])}" style="background:#0f6ab4;">
+              <h3>{$vo['time']}</h3>
+              <h2>{$vo['newsname']}</h2>
+            </a>
+            {/eq}
+
+            {eq name="mod" value="3"}
+            <a href="{:addon_url('wwh/index/news_detail',[':id'=>$vo['id']])}" style="background:url(__ADDON__/images/20200911153417.jpg ) no-repeat center;">
+              <h3>{$vo['time']}</h3>
+              <h2>{$vo['newsname']}</h2>
+            </a>
+          </div>{/eq}
+          {/volist}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/wow.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script src="__ADDON__/js/jquery.countup.min.js"></script>
+<script src="__ADDON__/js/jquery.waypoints.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(0).addClass('nav-active');//顶部导航变色
+
+    /*数字滚动*/
+    new WOW().init();
+    $('.num-box .item .num span ').countUp({
+        delay: 10,
+        time: 500
+    });
+
+    /*首页轮播*/
+    var swiper = new Swiper('.swiper', {
+        autoplay: 4000,
+        speed:1000,
+        effect : 'fade',
+        autoplayDisableOnInteraction : false,
+        slidesPerView : 1,
+        spaceBetween: 0,
+        noSwiping : true,
+        noSwipingClass : 'stop-swiping',
+        prevButton:'.prev',
+        nextButton:'.next',
+        pagination: '.pagination',
+        centeredSlides : true,
+        paginationClickable: true,
+        breakpoints: {
+            //当宽度小于等于960
+            960: {
+                noSwiping : false,
+                effect : 'fade',
+            }
+        },
+    })
+
+    $(".i1 .swiper_in1").hover(function(){
+        swiper.stopAutoplay();
+    },function(){
+        swiper.startAutoplay();
+    });
+</script>
+</body>
+</html>

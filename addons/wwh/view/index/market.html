@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>营销网络_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner3']});">
+    <div class="container">
+        <div class="t1">
+            SERVICE CENTRE<br>
+        </div>
+        <div class="t2">
+            <span>服务群众是我们的责任，群众满意是我们的心愿</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a href="{:addon_url('wwh/index/service')}">服务策略</a><i></i>
+                    <a class="active" href="{:addon_url('wwh/index/market')}">营销网络</a><i></i>
+                    <a href="{:addon_url('wwh/index/download')}">资料下载</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：服务中心</div>
+        </div>
+    </div>
+</div>
+
+<div id="market">
+    <div class="ne1">
+    <div class="container">
+        <div class="mapm">
+            <img src="__ADDON__/images/20200911153536.png">
+        </div>
+        <div class="a_dw" id="dt"></div>
+        <div class="tc2 wow">
+            销售咨询 <a class="f_24" href="tel:0571-88736894">0571-88888888</a><br/>
+            技术支持 <a class="f_24" href="tel:0571-88739930">0571-66666666</a>
+        </div>
+        <div class="tc3 clearfix wow" >
+            <div class="tlt">
+                <div class="tbtn clearfix">
+				{volist name='data' id='vo'}
+                    <span>{$vo['citylist']}</span>
+					{/volist}
+
+                </div>
+                <div class="txbox txbox1">
+				{volist name='data' id='vo'}
+                    <dl class="dl1">
+                        <dt class="dtt">{$vo['citylist']}</dt>
+                        <dd>
+                            <a class="dtt">联系人：{$vo['name']}</a>
+                            <div class="dtc"></div>
+                        </dd>
+                        <dd>
+                            <a class="dtt">地址：{$vo['address']}</a>
+                            <div class="dtc"></div>
+                        </dd>
+                        <dd>
+                            <a class="dtt">电话：{$vo['tel']}</a>
+                            <div class="dtc"></div>
+                        </dd>
+                    </dl>
+					{/volist}
+                </div>
+            </div>
+            <div class="trt">
+                <img src="__ADDON__/images/20200911153717.png">
+                <ul class="ditu">
+                    <li><s></s>浙江</li>
+                    <li><s></s>江苏</li>
+                    <li>安徽</li>
+                    <li>山东</li>
+                    <li>福建</li>
+                    <li><s></s>广东</li>
+                    <li>江西</li>
+                    <li><s></s>北京</li>
+                    <li><s></s>陕西</li>
+                    <li>河北</li>
+                    <li><s></s>辽宁</li>
+                    <li>湖南</li>
+                    <li><s></s>河南</li>
+                    <li><s></s>上海</li>
+                    <li><s></s>云南</li>
+                    <li><s></s>四川</li>
+                    <li><s></s>湖北</li>
+                    <li>吉林</li>
+                    <li>山西</li>
+                    <li>重庆</li>
+                    <li>广西</li>
+                    <li>天津</li>
+                    <li>内蒙古</li>
+                    <li>贵州</li>
+                    <li>黑龙江</li>
+                    <li>海南</li>
+                    <li>台湾</li>
+                    <li>香港</li>
+                    <li>新疆</li>
+                    <li>甘肃</li>
+                    <li>宁夏</li>
+                    <li>青海</li>
+                    <li>澳门</li>
+                    <li>西藏</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(3).addClass('nav-active');//顶部导航变色
+
+    $(".ne1 .tc3 .tlt .tbtn span").eq(0).addClass('act');
+    $(".ne1 .tc3 .tlt .tbtn span").on('click', function () {
+        var idx = $(this).index();
+        $(this).stop(true, false).addClass('act').siblings().stop(true, false).removeClass('act');
+        $('.ne1 .tc3 .tlt .txbox1 dl').eq(idx).stop(true, false).show().siblings().stop(true, false).hide();
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>公司概况_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner5']});">
+    <div class="container">
+        <div class="t1">
+            ABOUT US<br>
+        </div>
+        <div class="t2">
+            <span>专注于计算机通信集成（CTI）领域</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a class="active" href="{:addon_url('wwh/index/about')}">公司概况</a><i></i>
+                    <a href="{:addon_url('wwh/index/honor')}">荣誉资质</a><i></i>
+                    <a href="{:addon_url('wwh/index/join')}">加入我们</a><i></i>
+                    <a href="{:addon_url('wwh/index/contact')}">联系我们</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：关于我们</div>
+        </div>
+    </div>
+</div>
+
+<div id="about">
+    <div class="container">
+        <div class="about-box top1">
+            <div class="about-title">
+                {$data['about_title']}</div>
+            <div class="desc-box">
+                <div class="info-box">
+                    <div class="info">
+                        {$data['about_description']}</div>
+                    <a href="javascript:;" class="more" onclick="showMore()"><span>查看更多</span></a>
+                </div>
+                <div class="video-box">
+                    <img src="__ADDON__/images/20200911150108.jpg" alt="{$data['about_title']}">
+                </div>
+            </div>
+        </div>
+        <div class="about-box">
+            <div class="about-title">
+                企业文化
+            </div>
+            <div class="culture-box">
+                <div class="left items item01">
+                    <img src="__ADDON__/images/20200911150300.jpg" alt="{$data['culture_title1']}">
+                    <div class="text-box">
+                        <i style="background-image: url('__ADDON__/images/20200810111930.png');"></i>
+                        <div class="title">
+                            <p class="cn">{$data['culture_title1']}</p>
+                            <p class="en">{$data['culture_en1']}</p>
+                        </div>
+                        <div class="txt">{$data['culture_des1']}</div>
+                    </div>
+                </div>
+                <div class="culture">
+                    <div class="items" style="background-image: url('__ADDON__/images/20200911150423.jpg');">
+                        <img src="__ADDON__/images/20200911150423.jpg" alt="{$data['culture_title2']}">
+                        <div class="text-box">
+                            <i style="background-image: url('__ADDON__/images/20200810102717.png');"></i>
+                            <div class="title">
+                                <p class="cn">{$data['culture_title2']}</p>
+                                <p class="en">{$data['culture_en2']}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="items" style="background-image: url('__ADDON__/images/20200911160101.jpg');">
+                        <img src="__ADDON__/images/20200911160101.jpg" alt="{$data['culture_title3']}">
+                        <div class="text-box">
+                            <i style="background-image: url('__ADDON__/images/20200810131740.png');"></i>
+                            <div class="title">
+                                <p class="cn">{$data['culture_title3']}</p>
+                                <p class="en">{$data['culture_en3']}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="items" style="background-image: url('__ADDON__/images/20200911150857.jpg');">
+                        <img src="__ADDON__/images/20200911150857.jpg" alt="{$data['culture_title4']}">
+                        <div class="text-box">
+                            <i style="background-image: url('__ADDON__/images/20200810111846.png');"></i>
+                            <div class="title">
+                                <p class="cn">{$data['culture_title4']}</p>
+                                <p class="en">{$data['culture_en4']}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="items" style="background-image: url('__ADDON__/images/20200911151027.jpg');">
+                        <img src="__ADDON__/images/20200911151027.jpg" alt="{$data['culture_title5']}">
+                        <div class="text-box">
+                            <i style="background-image: url('__ADDON__/images/20200810102732.png');"></i>
+                            <div class="title">
+                                <p class="cn">{$data['culture_title5']}</p>
+                                <p class="en">{$data['culture_en5']}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="develop-box">
+        <div class="container">
+            <div class="about-box">
+                <div class="about-title">
+                    发展历程
+                </div>
+                <div class="develop-banner">
+                    <div class="swiper-container swiper-develop">
+                        <div class="swiper-wrapper">
+                            {volist name="development" id="vo"}
+                            <div class="swiper-slide">
+                                <div class="year"><span>{$vo['year']}</span>年</div>
+                                {$vo['content']}
+                            </div>
+                            {/volist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="prevNext-box">
+            <a href="javascript:;" class="prev"></a>
+            <a href="javascript:;" class="next"></a>
+        </div>
+    </div>
+
+<!--弹窗介绍-->
+<div class="more-cover">
+    <div class="info-content">
+        <div class="close-box">
+            <i style="background-image: url('__ADDON__/images/close.png');"></i>
+        </div>
+        <div class="content">
+            {$data['about_content']}
+        </div>
+
+    </div>
+</div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(5).addClass('nav-active');//顶部导航变色
+    
+	var develop_banner= new Swiper('.swiper-develop', {
+        autoplay: 4000,
+        spaceBetween:"3.333%",
+        slidesPerView:"auto",
+        prevButton:'.prev',
+        nextButton:'.next',
+        navigation: {
+            nextEl: '.develop-box .prevNext-box .next',
+            prevEl: '.develop-box .prevNext-box .prev',
+        },
+    });
+    function showMore() {
+        $(".more-cover").fadeIn(300);
+    };
+    $(".more-cover .close-box").click(function () {
+        $(".more-cover").fadeOut(300);
+    });
+
+</script>
+</body>
+</html>

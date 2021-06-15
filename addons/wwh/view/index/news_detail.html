@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="{$data['n_keywords']}"/>
+    <meta name="description" content="{$data['n_description']}"/>
+    <title>{$data['newsname']}_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner4']});">
+    <div class="container">
+        <div class="t1">
+            NEWS<br>
+        </div>
+        <div class="t2">
+            <span>紧密跟随国家产业指导及技术发展</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    {foreach name='newscategory' id='vo'}
+                    <a href="{:addon_url('wwh/index/news', [':id'=>$vo['id']])}">{$vo['name']}</a><i></i>
+                    {/foreach}
+                </div>
+            </div>
+            <div class="hamb">当前位置：新闻中心</div>
+        </div>
+    </div>
+</div>
+    <div id="newsdt">
+    <div class="news_con">
+        <div class="container pr clearfix">
+            <div class="artInfo-left">
+                <div class="artInfo-name">{$data['newsname']}</div>
+                <div class="artInfo-ab">
+                    <span>发布时间：{$data['time']}</span>
+                    <span>浏览数：{$data['views']}</span>
+                </div>
+                <div class="artInfo-con">
+                    {$data['content']}
+                </div>
+                <div class="artInfo-page clearfix">
+                    <a href="{:addon_url('wwh/index/news_detail',[':id'=>$after['id']])}" title="{$after['newsname']}"  class="fl"><span class="type">上一篇 :</span>{$after['newsname']}</a>
+                    <a href="{:addon_url('wwh/index/news_detail',[':id'=>$front['id']])}"  class="fr" title="{$front['newsname']}"><span class="type">下一篇 :</span>{$front['newsname']}</a>
+                </div>
+            </div>
+
+            <div class="artInfo-right">
+                <div class="aiAbout-news">
+                    <div class="top">热门文章</div>
+                    <ul class="list">
+                        {volist name="news2" id="vo"}
+                        <li>
+                            <div class="date">{$vo.time|strtotime|date="Y年m月d日",###}</div>
+                            <div class="name"><a href="{:addon_url('wwh/index/news_detail',[':id'=>$vo['id']])}" title="">{$vo['newsname']}</a></div>
+                        </li>
+                        {/volist}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(4).addClass('nav-active');//顶部导航变色
+</script>
+</body>
+</html>

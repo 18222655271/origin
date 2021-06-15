@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>服务策略_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner3']});">
+    <div class="container">
+        <div class="t1">
+            SERVICE CENTRE<br>
+        </div>
+        <div class="t2">
+            <span>服务群众是我们的责任，群众满意是我们的心愿</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a class="active" href="{:addon_url('wwh/index/service')}">服务策略</a><i></i>
+                    <a href="{:addon_url('wwh/index/market')}">营销网络</a><i></i>
+                    <a href="{:addon_url('wwh/index/download')}">资料下载</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：服务中心</div>
+        </div>
+    </div>
+</div>
+
+<div id="service">
+    <div class="container">
+        <div class="policy-box">
+            {$data['content']}
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(3).addClass('nav-active');//顶部导航变色
+</script>
+</body>
+</html>

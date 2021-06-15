@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>加入我们_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner5']});">
+    <div class="container">
+        <div class="t1">
+            ABOUT US<br>
+        </div>
+        <div class="t2">
+            <span>专注于计算机通信集成（CTI）领域</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a href="{:addon_url('wwh/index/about')}">公司概况</a><i></i>
+                    <a href="{:addon_url('wwh/index/honor')}">荣誉资质</a><i></i>
+                    <a class="active" href="{:addon_url('wwh/index/join')}">加入我们</a><i></i>
+                    <a href="{:addon_url('wwh/index/contact')}">联系我们</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：关于我们</div>
+        </div>
+    </div>
+</div>
+
+<div id="join">
+    <div class="container">
+        <div class="join-box">
+            <div class="join-nav">
+                <a class="item active">社会招聘</a>
+            </div>
+            <div class="text">我们期待这样的你：<br>勇于挑战，敢于创新，突破自我，在专业道路上不断精进；<br>有协作精神，能与伙伴真诚沟通，共同学习成长。</div>
+            <form method="post" class="join-select">
+                <input type="text" name="keywords" id="keywords" value="" placeholder="输入职位关键字">
+                <div class="select">
+                    <select name="branch" id="branch">
+                        <option value="" selected>所有部门</option>
+                        {volist name="dept" id="vo"}
+                        <option value="{$vo['dept']}">{$vo['dept']}</option>
+                        {/volist}
+                    </select>
+                </div>
+                <div class="select">
+                    <select name="address" id="address">
+                        <option value="" selected>工作地点</option>
+                        {volist name="addr" id="vo"}
+                        <option value="{$vo['addr']}">{$vo['addr']}</option>
+                        {/volist}
+                    </select>
+                </div>
+                <!--<button class="btn" type="submit">搜索</button>-->
+                <button name="button" type="button" id="btn" class="btn">搜索</button>
+            </form>
+            <!--<div class="num-box">当前条件下共有<span>{$total}</span>个岗位</div>-->
+            <ul class="join-list">
+                <div id="shuju">
+                {volist name="list" id="vo"}
+                <li>
+                    <div class="recruit-top">
+                        <div>
+                            职位： <span>{$vo['name']}</span>
+                        </div>
+                        <div>
+                            部门：<span>{$vo['dept']}</span>
+                        </div>
+                        <div>
+                            工作地点：<span>{$vo['addr']}</span>
+                        </div>
+                        <div>
+                            招聘人数：<span>{$vo['num']}</span>
+                        </div>
+                        <div>
+                            发布时间： <span>{$vo['time']}</span>
+                        </div>
+                    </div>
+                    <div class="recruit-content">
+                        <h2 style="margin: 0px; padding: 18px 0px; font-size: 18px; color: rgb(51, 51, 51); border-top: 0px none; font-family: " microsoft="" white-space:="" background-color:=""><span class="bname" style="height: 20px; line-height: 20px; margin-top: 15px; padding-left: 15px; border-left: 4px solid rgb(255, 96, 0);">职位信息</span></h2>
+                        {$vo['content']}
+                        <a href="mailto:hr@admin.com" class="join-in">立即申请</a>
+                    </div>
+                </li>
+            {/volist}
+                </div>
+            </ul>
+        </div>
+        <div class="fenye">{$page}</div>
+    </div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(5).addClass('nav-active');//顶部导航变色
+
+    $('body').on('click', '.join-list .recruit-top', function () {
+        if($(this).hasClass("flag")){
+            $(this).removeClass("active");
+            $(this).removeClass("flag");
+            $(this).parent("li").children(".recruit-content").slideUp(600);
+        }else{
+            $(".join-list .recruit-top").removeClass("active");
+            $(this).addClass("active");
+            $(".join-list .recruit-top").removeClass("flag");
+            $(this).addClass("flag");
+            $(".join-list .recruit-top").parent("li").children(".recruit-content").slideUp(600);
+            $(this).parent("li").children(".recruit-content").slideDown(600);
+        }
+    });
+
+    $(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        _this = $(this);
+        var href = _this.attr("href");
+        $.ajax({
+            url:href,
+            dataType:'json',
+            type:"post",
+            data:[],
+            success:function(res){
+                console.log(res);
+                $("#shuju").empty();
+                var str = "";
+                $.each(res.list.data,function(k,v){
+                    str+='<li>\
+                        <div class="recruit-top">\
+                        <div>\
+                        职位： <span>'+v.name+'</span>\
+                    </div>\
+                    <div>\
+                    部门：<span>'+v.dept+'</span>\
+                    </div>\
+                    <div>\
+                    工作地点：<span>'+v.addr+'</span>\
+                    </div>\
+                    <div>\
+                    招聘人数：<span>'+v.num+'</span>\
+                    </div>\
+                    <div>\
+                    发布时间： <span>'+v.time+'</span>\
+                    </div>\
+                    </div>\
+                    <div class="recruit-content">\
+                        <h2 style="margin: 0px; padding: 18px 0px; font-size: 18px; color: rgb(51, 51, 51); border-top: 0px none; font-family: " microsoft="" white-space:="" background-color:=""><span class="bname" style="height: 20px; line-height: 20px; margin-top: 15px; padding-left: 15px; border-left: 4px solid rgb(255, 96, 0);">职位信息</span></h2>\
+                        '+v.content+'\
+                        <a href="mailto:hr@admin.com" class="join-in">立即申请</a>\
+                        </div>\
+                        </li>';
+                });
+				location.href = "#nav2";
+                $('#shuju').html(str);
+                $(".fenye").html(res.page);
+            }
+        })
+    });
+
+    $(function(){
+        $("button").click(function(){
+            var k = $("#keywords").val();
+            var b = $("#branch").val();
+            var a = $("#address").val();
+            $.ajax({
+                type:"post",
+                url:"{:addon_url('wwh/index/join')}",
+                data:{keywords:k,branch:b,address:a},
+                dataType:"json",
+                success:function(res){
+                    console.log(res);
+                    $("#shuju").empty();
+                    var str = "";
+                    $.each(res.list.data,function(k,v){
+                        str+='<li>\
+                        <div class="recruit-top">\
+                        <div>\
+                        职位： <span>'+v.name+'</span>\
+                    </div>\
+                    <div>\
+                    部门：<span>'+v.dept+'</span>\
+                    </div>\
+                    <div>\
+                    工作地点：<span>'+v.addr+'</span>\
+                    </div>\
+                    <div>\
+                    招聘人数：<span>'+v.num+'</span>\
+                    </div>\
+                    <div>\
+                    发布时间： <span>'+v.time+'</span>\
+                    </div>\
+                    </div>\
+                    <div class="recruit-content">\
+                        <h2 style="margin: 0px; padding: 18px 0px; font-size: 18px; color: rgb(51, 51, 51); border-top: 0px none; font-family: " microsoft="" white-space:="" background-color:=""><span class="bname" style="height: 20px; line-height: 20px; margin-top: 15px; padding-left: 15px; border-left: 4px solid rgb(255, 96, 0);">职位信息</span></h2>\
+                        '+v.content+'\
+                        <a href="mailto:hr@admin.com" class="join-in">立即申请</a>\
+                        </div>\
+                        </li>';
+                    });
+                    $('#shuju').html(str);
+                    $(".fenye").html(res.page);
+                }
+            })
+            $("#keywords").val("");
+            $("#branch").val("");
+            $("#address").val("");
+        })
+    });
+</script>
+</body>
+</html>

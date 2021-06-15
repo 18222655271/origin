@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>站外调用在线客服例子</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <!-- 在线客服依赖以下css和js文件,请按需引入 -->
+    <link rel="stylesheet" type="text/css" href="http://kefu.cn/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://kefu.cn/assets/addons/kefu/css/kefu_default.css">
+    <script type="text/javascript" src="http://kefu.cn/assets/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://kefu.cn/assets/addons/kefu/js/kefu.js"></script>
+    <script type="text/javascript" src="http://kefu.cn/assets/libs/fastadmin-layer/dist/layer.js"></script>
+    <script type="text/javascript" src="http://kefu.cn/assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    KeFu.initialize('kefu.cn', 'index');
+    // 参数一为在线客服所在网站的域名(启动Workerman服务的网站的域名)
+    // 参数二为模块名,站外直接填写index
+    // 参数三为初始化完成后的回调方法
+    // 参数四为指定客服，可在此处填写客服代表的后台账户id
+    // 若要站外调用，请于后台-》插件管理-》本插件的配置中-》跨站调用允许域名-》填写外站的域名
+
+    // 您也可以参考站内其他模块调用的可运行示例，访问路径 `http://您的域名/addons/kefu`
+</script>
+</body>
+</html>

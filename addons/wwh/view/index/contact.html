@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>联系我们_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner5']});">
+    <div class="container">
+        <div class="t1">
+            ABOUT US<br>
+        </div>
+        <div class="t2">
+            <span>专注于计算机通信集成（CTI）领域</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a href="{:addon_url('wwh/index/about')}">公司概况</a><i></i>
+                    <a href="{:addon_url('wwh/index/honor')}">荣誉资质</a><i></i>
+                    <a href="{:addon_url('wwh/index/join')}">加入我们</a><i></i>
+                    <a class="active" href="{:addon_url('wwh/index/contact')}">联系我们</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：关于我们</div>
+        </div>
+    </div>
+</div>
+
+<div id="contact">
+    <div class="container">
+        <div class="contact-box">
+            <div class="address-items">
+                <div class="item">
+                    <div class="img">
+                    <img src="__ADDON__/images/tel1.png" alt="">
+                    <img src="__ADDON__/images/tel2.png" alt="">
+                    </div>
+                    <p class="t1">总机</p>
+                    <p class="desc">{$data['tel']}</p>
+                </div>
+                <div class="item">
+                    <div class="img">
+                        <img src="__ADDON__/images/fax1.png" alt="">
+                        <img src="__ADDON__/images/fax2.png" alt="">
+                    </div>
+                    <p class="t1">传真</p>
+                    <p class="desc">{$data['fax']}</p>
+                </div>
+                <div class="item">
+                    <div class="img">
+                        <img src="__ADDON__/images/mail1.png" alt="">
+                        <img src="__ADDON__/images/mail2.png" alt="">
+                    </div>
+                    <p class="t1">邮箱</p>
+                    <p class="desc">{$data['email']}</p>
+                </div>
+                <div class="item">
+                    <div class="img">
+                        <img src="__ADDON__/images/time1.png" alt="">
+                        <img src="__ADDON__/images/time2.png" alt="">
+                    </div>
+                    <p class="t1">工作时间</p>
+                    <p class="desc">{$data['time']}</p>
+                </div>
+                <div class="item">
+                    <div class="img">
+                        <img src="__ADDON__/images/add1.png" alt="">
+                        <img src="__ADDON__/images/add2.png" alt="">
+                    </div>
+                    <p class="t1">地址</p>
+                    <p class="desc">{$data['address']}</p>
+                </div>
+            </div>
+
+            <div class="map-box">
+                <div id="map"></div>
+            </div>
+
+        <div class="message-box" id="message">
+            <div class="title"><span>客户留言</span>欢迎给我们留言</div>
+            <form id="ct_btn" method="post" action="" class="form-box">
+                <div class="line has-star">
+                    <input type="text" placeholder="姓名" name="realname" id="realname">
+                </div>
+                <div class="line has-star">
+                    <input type="text" placeholder="公司名称" name="company" id="company">
+                </div>
+                <div class="line has-star">
+                    <input type="text" placeholder="电话" name="tel" id="tel">
+                </div>
+                <div class="line">
+                    <input type="text" placeholder="邮箱" name="email" id="email">
+                </div>
+                <div class="line has-text has-star">
+                    <textarea name="content" id="content" cols="30" rows="10" placeholder="留言内容"></textarea>
+                </div>
+                <div class="code-box">
+                    <div class="line has-star">
+                        <input type="text" placeholder="验证码" name="verify" id="verify">
+                    </div>
+                    <div class="img-box">
+                        <img id="verifyImgs" src="{:addon_url('wwh/index/verify')}" alt="验证码" title="看不清楚?换一张" onclick="this.src='{:addon_url('wwh/index/verify')}?seed='+Math.random()"/>                    </div>
+                </div>
+                <button class="msg-btn" type="button" onClick="ct_btn()">留言提交</button>
+            </form>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=65557d5eb3cf67817f33df489fb96458"></script>
+<script>
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(5).addClass('nav-active');//顶部导航变色
+    function loadmap(){
+        // 百度地图API功能
+        var map = new BMap.Map("map");
+        var point = new BMap.Point(120.210704,30.20676);
+        var myIcon = new BMap.Icon("__ADDON__/images/zb.png", new BMap.Size(25,25), {
+            // 指定定位位置。
+            // 当标注显示在地图上时，其所指向的地理位置距离图标左上
+            // 角各偏移10像素和25像素。您可以看到在本例中该位置即是
+            // 图标中央下端的尖角位置。
+            // 设置图片偏移。
+            // 当您需要从一幅较大的图片中截取某部分作为标注图标时，您
+            // 需要指定大图的偏移位置，此做法与css sprites技术类似。
+            imageOffset: new BMap.Size(0, 0)   // 设置图片偏移
+        });
+        map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+        map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+        map.centerAndZoom(point, 16);   //地图层级
+        var marker = new BMap.Marker(point,{icon: myIcon});  // 创建标注
+        map.addOverlay(marker);               // 将标注添加到地图中
+        var infohtml = '<div class="map-info"><div class="info"><p class="t1">杭州演示站点股份有限公司</p><p class="t2">浙江省杭州市滨江区江汉路1515号</p></div><a class="gps-box" href="http://api.map.baidu.com/marker?location=30.20676,120.210704&title=我的位置&content=杭州演示站点股份有限公司&output=html" target="_blank"><img src="__ADDON__/images/20200813153230.png"><p  class="tt">到这去</p></div>'
+        var label = new BMap.Label(infohtml,{offset:new BMap.Size(-80,-130)});
+        marker.setLabel(label);
+    }
+    loadmap();
+
+    //客户留言
+    function ct_btn(){
+        var realname=$.trim($("#realname").val());
+        var company=$.trim($("#company").val());
+        var tel=$.trim($("#tel").val());
+        var email=$.trim($("#email").val());
+        var content=$.trim($("#content").val());
+        var verify=$.trim($("#verify").val());
+        if(realname==''){alert('请填写姓名');return false;}
+        if(tel==''){alert('请填写电话');return false;}
+        var reg=/(^(\d{3,4}-)?\d{7,8})$|(1[3|4|5|7|8|9]\d{9})$/;
+        if(!reg.test(tel)){alert('请填写有效的电话');return false;}
+//        if(email==''){alert('请填写邮箱');return false;}
+//        var myreg =/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+//        if(!myreg.test(email)){alert('请填写有效的邮箱');return false;}
+        if(company==''){alert('请填写公司名称');return false;}
+        if(content==''){alert('请填写内容');return false;}
+        if(verify==''){alert('请填写验证码');return false;}
+
+        //重载验证码
+        function fleshVerify(){
+            $('#verifyImgs').attr('src','{:addon_url('wwh/index/verify')}?seed='+Math.random());
+        }
+
+        $.ajax({
+            url: "{:addon_url('wwh/index/message')}",
+            type: "POST",
+            data: {'realname':realname,'company':company,'tel':tel,'email':email,'content':content,'verify':verify},
+            async: true,
+            dataType: "json",
+            success: function(mes){
+                if(mes==1){
+                    alert("提交成功");
+                    window.location.reload();
+                }else if(mes==2){
+                    alert("请检查后台邮件配置是否正确");
+                    fleshVerify();
+                }else {
+                    alert("验证码错误，请重试");
+                }
+
+            }
+        });
+    }
+</script>
+</body>
+</html>

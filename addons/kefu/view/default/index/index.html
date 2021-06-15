@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{$chat_name}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <!-- 在线客服依赖以下css和js文件,请按需引入 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__CDN__/assets/addons/kefu/css/kefu_default.css" rel="stylesheet">
+
+    <script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+    <script src="__CDN__/assets/addons/kefu/js/kefu.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    KeFu.initialize(document.domain, 'index', function () {
+        KeFu.toggle_window('show');// 打开窗口
+    });
+    // 参数一为在线客服所在网站的域名(启动Workerman服务的网站的域名)
+    // 参数二为模块名,站外直接填写index
+    // 参数三为初始化完成后的回调方法
+    // 参数四为指定客服，可在此处填写客服代表的后台账户id
+    // 若要站外调用，请于后台-》插件管理-》本插件的配置中-》跨站调用允许域名-》填写外站的域名
+</script>
+</body>
+</html>

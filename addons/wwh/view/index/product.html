@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>产品中心_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner1']});">
+    <div class="container">
+        <div class="t1">
+            PRODUCT CENTER<br>
+        </div>
+        <div class="t2" id="pro">
+            <span>强大的产品研发能力和创新能力</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    {foreach name='productcategory' id='vo'}
+                    <a {if condition="$vo['id'] eq $id" } class="active" {/if} href="{:addon_url('wwh/index/product', [':id'=>$vo['id']])}">{$vo['name']}</a><i></i>
+                    {/foreach}
+                </div>
+            </div>
+            <div class="hamb">当前位置：产品中心</div>
+        </div>
+    </div>
+</div>
+
+{if $prostatus == '1'}
+<div class="pn-box">
+    <div class="pn-title">
+        <span>产</span>
+        <span>品</span>
+        <span>分</span>
+        <span>类</span>
+    </div>
+    <div class="pn-list">
+        <ul class="f-cb">
+            {volist name="name" id="vo"}
+            <li>
+                <div class="pn-tit-one pn-tit" href="javascript:;"><a href="{:addon_url('wwh/index/product', [':id'=>$vo['id']])}" >{$vo['name']}</a></div>
+                <div class="pn-con-one pn-content">
+                    {volist name="vo.child" id="vo2"}
+                    <div class="pn-tit-two pn-tit" href="javascript:;"><a href="{:addon_url('wwh/index/product', [':id'=>$vo2['id']])}">{$vo2['name']}</a></div>
+                    <div class="pn-con-two pn-content">
+                        {volist name="vo2.child" id="vo3"}
+                        <a {if condition="$vo3['id'] eq $id"}class="pn-tit-three cut cursleect font-blod pn-tit" {else/} class="pn-tit-three  pn-tit" {/if} href="{:addon_url('wwh/index/product', [':id'=>$vo3['id']])}">&nbsp;&nbsp;{$vo3['name']}</a>
+                        {/volist}
+                    </div>
+                    {/volist}
+                </div>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+</div>
+{else/}
+{/if}
+
+<div id="product">
+    <div class="container">
+        <div class="pro-list" id="shuju">
+            {volist name="list" id="vo"}
+            <a class="item" href="{:addon_url('wwh/index/product_detail',[':id'=>$vo['id']])}">
+                <div class="pic">
+                    <img src="{$vo['indent_image']}" alt="{$vo['productname']}">
+                </div>
+                <div class="info">
+                    <p class="t1 over-line1">{$vo['productname']}</p>
+                    <p class="t2 over-line2">{$vo['model']}</p>
+                </div>
+            </a>
+            {/volist}
+        </div>
+        <div class="fenye">{$page}</div>
+    </div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(1).addClass('nav-active');//顶部导航变色
+
+    $(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        _this = $(this);
+        var href = _this.attr("href");
+        $.ajax({
+            url:href,
+            dataType:'json',
+            type:"post",
+            data:[],
+            success:function(res){
+                console.log(res);
+                $("#shuju").empty();
+                var str = "";
+                $.each(res.list.data,function(k,v){
+                    str+='<a class="item" href="{:addon_url('wwh/index/product_detail',[':id'=>"'+v.id+'"])}">\
+                    <div class="pic">\
+                        <img src="'+v.indent_image+'" alt="'+v.productname+'">\
+                        </div>\
+                        <div class="info">\
+                        <p class="t1 over-line1">'+v.productname+'</p>\
+                        <p class="t2 over-line2">'+v.model+'</p>\
+                        </div>\
+                        </a>';
+                });
+                location.href = "#pro";
+                $('#shuju').html(str);
+                $(".fenye").html(res.page);
+            }
+        })
+    });
+
+    $(function(){
+
+        $('.pn-list .pn-tit.cursleect').parents('.pn-content').slideDown().prev('.pn-tit').addClass('cur cut');
+
+        var retractLeft = $(".pn-list").width();
+        $('.pn-box').hover(function(){
+            $('.pn-list').addClass('on')
+            $('.pn-retract').css("left",retractLeft)
+        },function(){
+            $('.pn-list').removeClass('on')
+            $('.pn-retract').css("left",-retractLeft)
+        })
+
+        $('.pn-retract').hover(function() {
+            $('.pn-list').removeClass('on');
+            $('.pn-retract').css("left",-retractLeft)
+        },function(){
+            $('.pn-list').addClass('on')
+            $('.pn-retract').css("left",retractLeft)
+        })
+
+        $('.pn-list li .pn-tit-one').on('click',function(){
+            var sss = $(this).parent('li').index();
+            var len = $('.pn-list li').length-1;
+            if (sss == len) {
+                var off = $(this).offset().top - ($('.pn-list').height()/2);
+                $('.pn-list').stop().animate({'scrollTop':off},500);
+            };
+
+            if (!$(this).hasClass('cut')) {
+                $(this).addClass('cut').parents('li').siblings('li').find('.pn-tit-one').removeClass('cut');
+                $(this).next('.pn-con-one').slideDown().parents('li').siblings('li').find('.pn-con-one').slideUp()
+            }else{
+                $(this).removeClass('cut')
+                $(this).next('.pn-con-one').slideUp()
+            }
+        })
+        $('.pn-list li .pn-tit-two').on('click',function(){
+            var sss = $(this).parent('li').index();
+            var len = $('.pn-list li').length-1;
+            if (sss == len) {
+                var off = $(this).offset().top - ($('.pn-list').height()/2);
+                $('.pn-list').stop().animate({'scrollTop':off},500);
+            };
+
+            if (!$(this).hasClass('cut')) {
+                $(this).addClass('cut').parents('li').siblings('li').find('.pn-tit-two').removeClass('cut');
+                $(this).next('.pn-con-two').slideDown().parents('li').siblings('li').find('.pn-con-two').slideUp()
+            }else{
+                $(this).removeClass('cut')
+                $(this).next('.pn-con-two').slideUp()
+            }
+        })
+
+        $('.pn-list li .pn-tit-three').on('click',function(){
+            if (!$(this).hasClass('cur')) {
+                $(this).addClass('cur').siblings('.pn-tit-three').removeClass('cur').parents('li').siblings('li').find('.pn-tit-three').removeClass('cur');
+                $(this).next('.pn-con-three').slideDown().siblings('.pn-con-three').slideUp().parents('li').siblings('li').find('.pn-con-three').slideUp()
+            }else{
+                $(this).removeClass('cur')
+                $(this).next('.pn-con-three').slideUp()
+            }
+        })
+
+    })
+</script>
+</body>
+</html>

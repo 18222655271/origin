@@ -17,18 +17,26 @@ return [
             'kefu',
             'shopro',
         ],
+        'action_begin' => [
+            'geetest',
+        ],
+        'config_init' => [
+            'geetest',
+            'third',
+        ],
         'upgrade' => [
             'kefu',
             'shopro',
         ],
-        'config_init' => [
-            'third',
+        'leesignhook' => [
+            'leesign',
         ],
         'testhook' => [
             'ykquest',
         ],
     ],
     'route' => [
+        '/leesign$' => 'leesign/index/index',
         '/third$' => 'third/index/index',
         '/third/connect/[:platform]' => 'third/index/connect',
         '/third/callback/[:platform]' => 'third/index/callback',

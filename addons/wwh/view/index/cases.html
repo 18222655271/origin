@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>解决方案_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner2']});">
+    <div class="container">
+        <div class="t1">
+            SOLUTION<br>
+        </div>
+        <div class="t2">
+            <span>根据每个客户的不同需求定制不同层次的解决方案</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    {foreach name='casescategory' id='vo'}
+                    <a {if condition="$vo['id'] eq $id" } class="active" {/if} href="{:addon_url('wwh/index/cases', [':id'=>$vo['id']])}">{$vo['name']}</a><i></i>
+                    {/foreach}
+                </div>
+            </div>
+            <div class="hamb">当前位置：解决方案</div>
+        </div>
+    </div>
+</div>
+
+<div id="cases">
+<div class="container">
+    <div class="solution-items">
+        <div class="items" id="shuju">
+            {volist name="list" id="vo"}
+            <div class="item">
+                <div class="pic" style="background-image:url('{$vo['indent_image']}');">
+                    <a href="{:addon_url('wwh/index/cases_detail',[':id'=>$vo['id']])}"><img src="{$vo['indent_image']}" alt="{$vo['casesname']}"></a>
+                </div>
+                <div class="info">
+                    <a href="{:addon_url('wwh/index/cases_detail',[':id'=>$vo['id']])}" class="tt">{$vo['casesname']}</a>
+                    <div class="desc">{$vo['description']}</div>
+                    <a href="{:addon_url('wwh/index/cases_detail',[':id'=>$vo['id']])}" class="more"><span>查看详情</span></a>
+                </div>
+            </div>
+            {/volist}
+        </div>
+    </div>
+    <div class="fenye">{$page}</div>
+</div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(2).addClass('nav-active');//顶部导航变色
+
+    $(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        _this = $(this);
+        var href = _this.attr("href");
+        $.ajax({
+            url:href,
+            dataType:'json',
+            type:"post",
+            data:[],
+            success:function(res){
+                console.log(res);
+                $("#shuju").empty();
+                var str = "";
+                $.each(res.list.data,function(k,v){
+                    str+='<div class="item">\
+                        <div class="pic" style="background-image:url('+v.indent_image+');">\
+                        <a href="{:addon_url('wwh/index/cases_detail',[':id'=>"'+v.id+'"])}"><img src="'+v.indent_image+'" alt="'+v.casesname+'"></a>\
+                        </div>\
+                        <div class="info">\
+                        <a href="{:addon_url('wwh/index/cases_detail',[':id'=>"'+v.id+'"])}" class="tt">'+v.casesname+'</a>\
+                        <div class="desc">'+v.description+'</div>\
+                    <a href="{:addon_url('wwh/index/cases_detail',[':id'=>"'+v.id+'"])}" class="more"><span>查看详情</span></a>\
+                        </div>\
+                        </div>';
+                });
+                location.href = "#nav2";
+                $('#shuju').html(str);
+                $(".fenye").html(res.page);
+            }
+        })
+    });
+</script>
+</body>
+</html>

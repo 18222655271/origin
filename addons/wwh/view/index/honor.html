@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>荣誉资质_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner5']});">
+    <div class="container">
+        <div class="t1">
+            ABOUT US<br>
+        </div>
+        <div class="t2" id="pro">
+            <span>专注于计算机通信集成（CTI）领域</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a href="{:addon_url('wwh/index/about')}">公司概况</a><i></i>
+                    <a class="active" href="{:addon_url('wwh/index/honor')}">荣誉资质</a><i></i>
+                    <a href="{:addon_url('wwh/index/join')}">加入我们</a><i></i>
+                    <a href="{:addon_url('wwh/index/contact')}">联系我们</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：关于我们</div>
+        </div>
+    </div>
+</div>
+
+    <div id="honor">
+    <div class="container">
+        <div class="honor-box" id="shuju">
+            {volist name="list" id="vo"}
+            <div class="item" onClick="showpic(this);" data-pic="{$vo['image']}" data-title="{$vo['name']}">
+                <div class="pic">
+                    <img src="{$vo['image']}" alt="{$vo['name']}">
+                </div>
+                <div class="info over-line1">{$vo['name']}</div>
+            </div>
+            {/volist}
+        </div>
+        <div class="fenye">{$page}</div>
+    </div>
+
+<!--弹窗介绍-->
+<div class="honor-cover">
+    <div class="pic-box">
+        <div class="close-box">
+            <i style="background-image: url('__ADDON__/images/close.png');"></i>
+        </div>
+        <div class="pic">
+            <img src="" alt="">
+        </div>
+        <div class="info"></div>
+    </div>
+</div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(5).addClass('nav-active');//顶部导航变色
+
+    $(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        _this = $(this);
+        var href = _this.attr("href");
+        $.ajax({
+            url:href,
+            dataType:'json',
+            type:"post",
+            data:[],
+            success:function(res){
+                console.log(res);
+                $("#shuju").empty();
+                var str = "";
+                $.each(res.list.data,function(k,v){
+                    str+='<div class="item" onClick="showpic(this);" data-pic="'+v.image+'" data-title="'+v.name+'">\
+                    <div class="pic">\
+                        <img src="'+v.image+'" alt="'+v.name+'">\
+                        </div>\
+                        <div class="info over-line1">'+v.name+'</div>\
+                        </div>';
+                });
+                location.href = "#pro";
+                $('#shuju').html(str);
+                $(".fenye").html(res.page);
+            }
+        })
+    });
+
+    $("#honor .honor-cover .pic-box .close-box").click(function () {
+        $(".honor-cover").fadeOut(300);
+    });
+    function showpic(obj){
+        var pic = $(obj).attr("data-pic");
+        var title = $(obj).attr("data-title");
+        var img = '<img src="'+pic+'" alt="'+title+'">';
+        $(".honor-cover .info").text(title);
+        $(".honor-cover .pic-box .pic").html(img);
+        $(".honor-cover").fadeIn(300);
+    }
+</script>
+</body>
+</html>

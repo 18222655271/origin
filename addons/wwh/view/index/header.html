@@ -1,0 +1,191 @@
+<div class="Header-wrapper">
+  <div class="header-container">
+    <div class="contain clearfix">
+      <a href="{:addon_url('wwh/index/index')}" title="" class="H-logo">
+        <img src="{$config['logo']}" alt="" class="" />
+      </a>
+      <div class="Hmenu-btn H-rMenu-btn">
+        <a></a>
+      </div>
+      <div class="Hmenu-btn Hmenu-web">
+        <a></a>
+      </div>
+      <ul class="H-nav clearfix">
+        <li>
+          <a href="{:addon_url('wwh/index/index')}" title="" class="Hnav-menu">首页
+            <i></i>
+          </a>
+        </li>
+        <li>
+          <a href="{:addon_url('wwh/index/product',[':id'=>''])}" title="" class="Hnav-menu">产品中心
+            <i></i>
+          </a>
+          <div class="Hnav-sub">
+            <div class="contain clearfix">
+              <ul class="HnavSub-list clearfix">
+                {volist name='productcategory' id='vo' empty='请导入测试数据'}
+                <li>
+                  <a href="{:addon_url('wwh/index/product', [':id'=>$vo['id']])}" title="">{$vo['name']}
+                    <i></i>
+                  </a>
+                </li>
+                {/volist}
+              </ul>
+              <div class="HnavSub-box">
+                <div class="HnavSub-box-pic">
+                  <a href="{:addon_url('wwh/index/product',[':id'=>''])}">
+                    <img src="__ADDON__/images/20200911152527.jpg" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <li>
+          <a href="{:addon_url('wwh/index/cases',[':id'=>''])}" title="" class="Hnav-menu">解决方案
+            <i></i>
+          </a>
+          <div class="Hnav-sub">
+            <div class="contain clearfix">
+              <ul class="HnavSub-list clearfix">
+                {volist name='casescategory' id='vo' empty='请导入测试数据'}
+                <li>
+                  <a href="{:addon_url('wwh/index/cases', [':id'=>$vo['id']])}" title="">{$vo['name']}
+                    <i></i>
+                  </a>
+                </li>
+                {/volist}
+              </ul>
+              <div class="HnavSub-box">
+                <div class="HnavSub-box-pic">
+                  <a href="{:addon_url('wwh/index/cases',[':id'=>''])}">
+                    <img src="__ADDON__/images/20200911152601.jpg" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        <li>
+        <a href="{:addon_url('wwh/index/service')}" title="" class="Hnav-menu">服务中心
+          <i></i>
+        </a>
+        <div class="Hnav-sub">
+          <div class="contain clearfix">
+            <ul class="HnavSub-list clearfix">
+              <li>
+                <a href="{:addon_url('wwh/index/service')}" title="">服务策略
+                  <i></i>
+                </a>
+              </li><li>
+              <a href="{:addon_url('wwh/index/market')}" title="">营销网络
+                <i></i>
+              </a>
+            </li><li>
+              <a href="{:addon_url('wwh/index/download')}" title="">资料下载
+                <i></i>
+              </a>
+            </li>
+            </ul>
+            <div class="HnavSub-box">
+              <div class="HnavSub-box-pic">
+                <a href="{:addon_url('wwh/index/service')}">
+                  <img src="__ADDON__/images/20200911152638.jpg" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div><li>
+        <a href="{:addon_url('wwh/index/news',[':id'=>''])}" title="" class="Hnav-menu">新闻中心
+          <i></i>
+        </a>
+        <div class="Hnav-sub">
+          <div class="contain clearfix">
+            <ul class="HnavSub-list clearfix">
+              {volist name='newscategory' id='vo' empty='请导入测试数据'}
+              <li>
+                <a href="{:addon_url('wwh/index/news', [':id'=>$vo['id']])}" title="">{$vo['name']}
+                  <i></i>
+                </a>
+              </li>
+              {/volist}
+            </ul>
+            <div class="HnavSub-box">
+              <div class="HnavSub-box-pic">
+                <a href="{:addon_url('wwh/index/news',[':id'=>''])}">
+                  <img src="__ADDON__/images/20200911152718.jpg" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div><li>
+        <a href="{:addon_url('wwh/index/about')}" title="" class="Hnav-menu">关于我们
+          <i></i>
+        </a>
+        <div class="Hnav-sub">
+          <div class="contain clearfix">
+            <ul class="HnavSub-list clearfix">
+              <li>
+                <a href="{:addon_url('wwh/index/about')}" title="">公司概况
+                  <i></i>
+                </a>
+              </li><li>
+              <a href="{:addon_url('wwh/index/honor')}" title="">荣誉资质
+                <i></i>
+              </a>
+            </li><li>
+              <a href="{:addon_url('wwh/index/join')}" title="">加入我们
+                <i></i>
+              </a>
+            </li><li>
+              <a href="{:addon_url('wwh/index/contact')}" title="">联系我们
+                <i></i>
+              </a>
+            </li>
+            </ul>
+            <div class="HnavSub-box">
+              <div class="HnavSub-box-pic">
+                <a href="{:addon_url('wwh/index/about')}">
+                  <img src="__ADDON__/images/20200911152752.jpg" alt="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ul>
+      <div class="H-action">
+        <div class="H-mail">
+          <a href="mailto:{$config['email']}" title="" class="Hmail-menu">
+            <i></i>
+            <span>Mail</span>
+            <b></b>
+          </a>
+        </div>
+        <div class="H-srch">
+          <a href="javascript:;" title="" class="Hsrch-menu">
+            <span>Search</span>
+            <i></i>
+          </a>
+          <div class="Hsrch-box">
+            <div class="Hsrch-block contain clearfix">
+              <form action="{:addon_url('wwh/index/search')}" method="post" id="top_form">
+                <input type="submit" value="" class="btn" id="top_btn" />
+                <input type="text" placeholder="新闻搜索..." class="text" name="keywords" id="top_key" />
+                <a href="javascript:;" title="" class="close"></a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    // 搜索
+    $("#top_btn").click(function () {
+        var top_key = $.trim($("#top_key").val());
+        if (top_key == '') {
+            alert("Please enter keywords");
+            return false;
+        }
+        $("#top_form").submit();
+    });
+</script>

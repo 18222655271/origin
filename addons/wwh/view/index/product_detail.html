@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="{$data['p_keywords']}"/>
+    <meta name="description" content="{$data['p_description']}"/>
+    <title>{$data['productname']}_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner1']});">
+    <div class="container">
+        <div class="t1">
+            PRODUCT CENTER<br>
+        </div>
+        <div class="t2">
+            <span>强大的产品研发能力和创新能力</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    {foreach name='productcategory' id='vo'}
+                    <a href="{:addon_url('wwh/index/product', [':id'=>$vo['id']])}">{$vo['name']}</a><i></i>
+                    {/foreach}
+                </div>
+            </div>
+            <div class="hamb">当前位置：产品中心</div>
+        </div>
+    </div>
+</div>
+
+<div id="product_dt">
+    <div class="container">
+    <div class="product-detail">
+        <div class="tops-box">
+            <div class="pro-banner">
+                <div class="swiper-container swiper-pro">
+                    <div class="swiper-wrapper">
+                        {foreach name="data['lunbo']" item="vo"}
+                        <div class="swiper-slide" style="background-image:url('{$vo}');">
+                            <img src="{$vo}" alt="">
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+                <div class="swiper-pagination swiper-pagination-pro"></div>
+            </div>
+            <div class="info-box">
+                <div class="title-box">
+                    <p class="t1">{$data['productname']}</p>
+                    <p class="t2">{$data['model']}</p>
+                </div>
+                <div class="desc">{$data['description']}</div>
+                <div class="bottoms">
+                    <a href="{:addon_url('wwh/index/contact')}#message" class="query">产品咨询</a>
+                </div>
+            </div>
+        </div>
+        <div class="pro-cont">
+            <div class="pro-nav">
+                <div class="item active" data-tab="1">功能特点</div>
+                <div class="item" data-tab="2">技术指标</div>
+                <div class="item" data-tab="3">外形尺寸</div>
+            </div>
+            <div class="content" id="cont01">{$data['gn_content']}</div>
+            <div class="content hide" id="cont02">{$data['zb_content']}</div>
+            <div class="content hide" id="cont03"><img src="{$data['size_image']}"></div>
+            <div class="content hide" id="cont04">
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script>
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(1).addClass('nav-active');//顶部导航变色
+
+    var pro_banner= new Swiper('.swiper-pro', {
+        autoplay: 4000,
+        pagination:'.swiper-pagination-pro',
+        slidesPerView:1,
+    });
+
+    $(".product-detail .pro-cont .pro-nav .item").click(function () {
+        $(this).addClass("active").siblings(".item").removeClass("active");
+        var tab=$(this).attr("data-tab");
+        // console.log("tab="+tab);
+        $(".product-detail .pro-cont .content").addClass("hide");
+        $("#cont0"+tab).removeClass("hide");
+    });
+</script>
+</body>
+</html>

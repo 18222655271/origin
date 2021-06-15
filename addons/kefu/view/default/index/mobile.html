@@ -1,0 +1,116 @@
+<!-- FastAdmin在线客服插件不是开源产品，所有文字、图片、样式、风格等版权归在线客服作者所有，如有复制、仿冒、抄袭、盗用，FastAdmin和在线客服作者将追究法律责任 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$chat_name}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="__CDN__/assets/addons/kefu/css/kefu_mobile.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="kefu_container">
+    <header class="main_header">
+        <span id="header_title"></span>
+        <span id="csr_status" style="color: rgb(60, 118, 61);"></span>
+        <span id="kefu_error">链接中...</span>
+        <!-- <i class="fa fa-close fa-lg fa-fw back_page"></i> -->
+    </header>
+
+    <div class="content_wrapper">
+
+        <!-- 聊天消息列表 -->
+        <div class="chat_wrapper"></div>
+
+        <!--留言板-->
+        <div id="kefu_leave_message" style="display: none;" class="panel panel-success kefu_window_view">
+            <div class="panel-heading">非常抱歉，当前无客服在线，您留言后我们将尽快与您联系</div>
+            <div class="panel-body">
+                <form method="get" action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="c-name" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="name" class="form-control" id="c-name" placeholder="请输入您的姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-contact" class="col-sm-2 control-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="contact" class="form-control" id="c-contact" placeholder="请输入手机/QQ/微信号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="c-message" class="col-sm-2 control-label">留言内容</label>
+                        <div class="col-sm-10">
+                            <textarea rows="5" name="message" class="form-control" id="c-message" placeholder="遇到的问题、所需服务、产品等，我们将尽快与您取得联系"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-success">确认留言</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 消息输入 -->
+        <div id="kefu_emoji"></div>
+
+        <!--客服输入状态-->
+        <div id="kefu_input_status"></div>
+
+        <div class="write">
+            <div class="widget_textarea">
+                <textarea id="kefu_message" spellcheck="false" style="height: 35px;"></textarea>
+            </div>
+            <div class="write_right">
+                {present name="toolbar.expression"}
+                <i class="smiley" title="{$toolbar.expression.title}" style="background: url('{$toolbar.expression.icon_image}') no-repeat center;background-size: 100% 100%;"></i>
+                {/present}
+                <i class="more" style="background:url('__CDN__/assets/addons/kefu/img/more.png') no-repeat center;background-size:100% 100%;"></i>
+                <button class="btn btn-success btn-sm send_btn">发送</button>
+            </div>
+        </div>
+        <div style="display: none;" class="footer_div">
+            <div class="toolbar">
+                {present name="toolbar.file"}
+                <div class="toolbar_item select_file">
+                    <input id="chatfile" size="1" width="20" type="file" name="chatfile">
+                    <img src="{$toolbar.file.icon_image}" alt="{$toolbar.file.title}" />
+                    <div>{$toolbar.file.title}</div>
+                </div>
+                {/present}
+                {present name="toolbar.goods"}
+                <div class="toolbar_item" data-toolbar_type="goods">
+                    <img src="{$toolbar.goods.icon_image}" alt="{$toolbar.goods.title}" />
+                    <div>{$toolbar.goods.title}</div>
+                </div>
+                {/present}
+                {present name="toolbar.order"}
+                <div class="toolbar_item" data-toolbar_type="order">
+                    <img src="{$toolbar.order.icon_image}" alt="{$toolbar.order.title}" />
+                    <div>{$toolbar.order.title}</div>
+                </div>
+                {/present}
+            </div>
+        </div>
+        <div style="display: none;" class="select_model">
+            <div class="close_select_model">关闭</div>
+            <div class="card_list"></div>
+        </div>
+    </div>
+</div>
+
+<script src=https://cdn.staticfile.org/jquery/2.1.4/jquery.min.js></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/layer/2.3/layer.js"></script>
+<script src="__CDN__/assets/addons/kefu/js/kefu_mobile.js"></script>
+<script>
+    KeFu.initialize(document.domain, 'index');
+</script>
+</body>
+</html>

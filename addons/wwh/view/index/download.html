@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content=" "/>
+    <meta name="description" content=" "/>
+    <title>下载中心_{$config['site_name']}</title>
+    <link rel="stylesheet" href="__ADDON__/css/swiper.css">
+    <link rel="stylesheet" href="__ADDON__/css/style.css">
+    <link rel="stylesheet" href="__ADDON__/css/media.css">
+    <link rel="shortcut icon" href="__ADDON__/images/favicon.ico">
+</head>
+<body>
+<!--头部-->
+{include file="index/header" /}
+<!--内容-->
+<div id="bann" style="background-image: url({$config['banner3']});">
+    <div class="container">
+        <div class="t1">
+            SERVICE CENTRE<br>
+        </div>
+        <div class="t2">
+            <span>服务群众是我们的责任，群众满意是我们的心愿</span>
+        </div>
+    </div>
+</div>
+
+<div id="nav2">
+    <div class="sub-menu ">
+        <div class="main container">
+            <div class="sub-nav">
+                <div class="items">
+                    <a href="{:addon_url('wwh/index/service')}">服务策略</a><i></i>
+                    <a href="{:addon_url('wwh/index/market')}">营销网络</a><i></i>
+                    <a class="active" href="{:addon_url('wwh/index/download')}">资料下载</a><i></i>
+                </div>
+            </div>
+            <div class="hamb">当前位置：服务中心</div>
+        </div>
+    </div>
+</div>
+
+<div id="download">
+    <div class="container">
+        <div class="clearfix down_1">
+            <div class="down_1_left">
+                资料下载
+                <br>
+                <span>Download</span>
+            </div>
+
+            <div class="down_1_right">
+                    <ul>
+                        <div class="select">
+                            <select name="category" id="category">
+                                <option style="background-color: #ffffff;" value="" selected>&nbsp;&nbsp;&nbsp;选择分类</option>
+                                {volist name="name" id="vo"}
+                                <option style="color: #808080;background-color: #f4f4f4;" value="{$vo['id']}">&nbsp;&nbsp;&nbsp;{$vo['name']}</option>
+                                {volist name="vo.child" id="vo2"}
+                                <option style="color:#333;background-color: #ffffff;" value="{$vo2['id']}">&nbsp;&nbsp;&nbsp; ├ {$vo2['name']}</option>
+                                {volist name="vo2.child" id="vo3"}
+                                <option style="color:#808080;background-color: #ffffff;" value="{$vo3['id']}">&nbsp;&nbsp;&nbsp; │├ {$vo3['name']}</option>
+                                {/volist}
+                                {/volist}
+                                {/volist}
+                            </select>
+                        </div>
+                        <li>
+                            <div class="down_form">
+                                <input type="text" value="" name="keywords" id="keywords" placeholder="请输入名称" />
+                            </div>
+                            <button name="button" type="button" id="btn" class="down_btn"></button>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+
+        <div class="clearfix down_2">
+            <ul>
+                <li class="down_2_1 ">
+                    <span class="down_2_1_left">名称</span>
+                    <span class="down_2_1_right">操作</span>
+                </li>
+                <div id="shuju">
+                {volist name="list" id="vo"}
+                <li class="down_2_2">
+                    <a href="{$vo['attachfile']}">
+                        <span class="down_2_2_left">{$vo['downloadname']}</span>
+                        <span class="down_2_2_left2">{$vo['time']}</span>
+                    </a>
+                    <a href="{$vo['attachfile']}">
+                        <span class="down_2_2_right">下载</span>
+                    </a>
+                </li>
+                {/volist}
+                </div>
+            </ul>
+        </div>
+        <div class="fenye">{$page}</div>
+    </div>
+</div>
+<!--底部-->
+{include file="index/footer" /}
+<script src="__ADDON__/js/jquery.min.js"></script>
+<script src="__ADDON__/js/swiper.min.js"></script>
+<script src="__ADDON__/js/style.js"></script>
+<script type="text/javascript">
+    $('.header-container .clearfix .H-nav .Hnav-menu').eq(3).addClass('nav-active');//顶部导航变色
+
+    $(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        _this = $(this);
+        var href = _this.attr("href");
+        $.ajax({
+            url:href,
+            dataType:'json',
+            type:"post",
+            data:[],
+            success:function(res){
+                console.log(res);
+                $("#shuju").empty();
+                var str = "";
+                $.each(res.list.data,function(k,v){
+                    str+='<li class="down_2_2">\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_left">'+v.downloadname+'</span>\
+                        <span class="down_2_2_left2">'+v.time+'</span>\
+                        </a>\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_right">下载</span>\
+                        </a>\
+                        </li>';
+                });
+				location.href = "#nav2";
+                $('#shuju').html(str);
+                $(".fenye").html(res.page);
+            }
+        })
+    });
+
+    $(function(){
+        $("button").click(function(){
+            var k = $("#keywords").val();
+            var c = $("#category").val();
+            $.ajax({
+                type:"post",
+                url:"{:addon_url('wwh/index/download')}",
+                data:{keywords:k,category:c},
+                dataType:"json",
+                success:function(res){
+                    console.log(res);
+                    $("#shuju").empty();
+                    var str = "";
+                    $.each(res.list.data,function(k,v){
+                        str+='<li class="down_2_2">\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_left">'+v.downloadname+'</span>\
+                        <span class="down_2_2_left2">'+v.time+'</span>\
+                        </a>\
+                        <a href="'+v.attachfile+'">\
+                        <span class="down_2_2_right">下载</span>\
+                        </a>\
+                        </li>';
+                    });
+                    $('#shuju').html(str);
+                    $(".fenye").html(res.page);
+                }
+            })
+            $("#keywords").val("");
+            $("#category").val("");
+        })
+    })
+</script>
+</body>
+</html>
