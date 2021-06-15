@@ -13,17 +13,10 @@ return [
             'alisms',
         ],
         'app_init' => [
-            'banip',
             'crontab',
             'kefu',
             'qrcode',
             'shopro',
-        ],
-        'electronics_build' => [
-            'electronics',
-        ],
-        'electronics_query' => [
-            'electronics',
         ],
         'action_begin' => [
             'geetest',
